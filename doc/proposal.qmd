@@ -1,8 +1,8 @@
 ---
-title: "Proposal: [Your project name]"
+title: "Proposal: March Madness Predictor"
 subtitle: "DATA 450 Capstone"
-author: "[Your Name]"
-date: today
+author: "Joseph Bellani"
+date: 2/5/2023
 bibliography: references.bib
 number-sections: true
 format:
@@ -12,51 +12,46 @@ jupyter: python3
 
 # Introduction
 
-[This section should contain background and introduction to your general topic.]
-HI ~~~~~~~~~~218398210982301
+For my project I want to explore the world of predicting sports, specifically the NCAA Men's basketball Tournament. To do so my goal is to create an algorithm that can predict the chances that a team has to win against any given team. Using all sorts of metrics and data about tournaments past. I want to see if I can build a predicted model that will perform better than average human being, and would like to put it to the test in a month and a half, given all goes well. 
 
 # Dataset
 
-[In this section, desribe the dataset(s). This includes things like where you
-obtained the dataset. Include a full citation, as specified 
-[here](https://guides.lib.umich.edu/c.php?g=282964&p=3285995). Describe how the
-data was obtained by the data owner/curator, as best as you can. List the 
-variables that you plan to use in your analysis, for example:
+ ESPN: [ESPN Stats](https://www.espn.com/mens-college-basketball/stats/team/_/view/opponent/table/offensive/sort/avgFreeThrowsMade/dir/asc) - Accessed 2/5/2023
 
-* weight: The patient's weight (kg)
-* sex: The patient's sex, male or female
-* age: The patient's age (months)
+ ESPN: [ESPN BPI](https://www.espn.com/mens-college-basketball/bpi) - Accessed 2/5/2023
 
+ kenpom: [kenpom ratings](https://kenpom.com/) - Accessed 2/5/2023
+
+* oBPI: The team's offensive Basket Power Index rating
+* dBPI: The team's defensive Basket Power Index rating
+* BPI: Summation of oBPI and dBPI
+* wins: The team's wins in the season
+* losses: The team's losses in the season
+* SOS: The team's Strength of Schedule in the season
+* ppg: The team's points scored per game
+* papg: The team's points allowed per game
+* to: The team's turnovers per game
+* toForced: The team's turnovers forced per game
+* Qwins: The team's quality wins in the season
+* Qlosees: The team's quality losses in the season
+* AdjEM: The team's Adjusted Efficiency Margin
+* AdjO: The team's Adjusted Offensive Efficiency
+* AdjD: The team's Adjusted Defensive Efficiency
+* AdjT: The team's Adjusted Tempo
+* Conf: The team's Conference
 ]
 
 # Data Acquisition and Processing
 
-[In this section, if applicable, describe how you will obtain the data (if it's
-anything more complicated than a simple download). Discuss what data 
-processing steps will be needed, such as recoding variables, data cleaning,
-data tidying, imputing missing values, etc. See sections 1c, 1d, 1e in the 
-"Good Enough Practices" paper.]
+The way I will be collecting the data will be through WebScraping from both ESPN and KenPom. After scraping is complete I will need to go through the data and see if anything must be cleaned before proceeding. It is likely that some variable names will need to be adjusted before use.
 
 # Research Questions and Methodology
 
-[In this section, list each of the questions you will explore. Following each
-question, provide a detailed and specific plan for how you plan to answer the 
-question. Include the specific steps you will take, what form the answer will 
-take (a number? table? visualization? model? Give all the specifics), and 
-estimate how many hours each question will take to complete.]
+1. Can a model based on data predict the March Madness tournament better than the average person? For this I will create a logistic regression model that will predict singular games which then will be combined to form a whole bracket. I will compare the results of the generated bracket to that of the ESPN "The People's Bracket" which is a culmination of every bracket submitted on ESPN, whichever bracket scores more points higher will be deemed the better bracket.
 
-1. Is smoking correlated with diabetes? To answer this, I will create a filled
-bar plot, with the left bar representing non-smokers, the middle bar
-representing people who smoke moderately, and the right bar representing heavy
-smokers. The bars will be the same height, and each bar will be
-colored two colors based on the proportion of patients in the group who do or
-do not have diabetes.
+2. What statistics does a model consider to be the most important when it comes to a team's chances of winning, and after the results are shown did the model overestimate or underestimate certain statistics. For this question I will analyze the equation of the logistic regression taking notes of which variables are kept, which are used and the amount of weight the variables have. Once the results are done I can look at which variables the winning teams had and see if the model accurately projected their chances based on those variables.
 
-2. Question 2? Plan for question 2.
-
-3. Question 3? Plan for question 3.
-
-4. etc.
+3. For the last question I would like to take a look at trends of teams making the tournaments. This will be a more historic view as opposed to a predictive model. I can make graphs to lay out trends of teams such as a line graph of points per game to see if that has changed in the past 10 years or so. A pie graph of which conferences teams are coming from. And more charts like those to analyze what teams that get into the tournament look like.
 
 # Work plan
 
@@ -66,12 +61,17 @@ have already been filled in for you.]
 
 **Week 4 (2/6 - 2/12):** [Just an example: 
 
-* Data tidying and recoding (4 hours)
-* Question 2 (4 hours).]
+* Webscraping Data (4 hours)
 
 **Week 5 (2/13 - 2/19):**
 
+* Building model for Question 1 (4 hours)
+* Analyze model equation for Question 2 (1 hour)
+
 **Week 6 (2/20 - 2/26):**
+
+* Test model for 2022 Tournament (2 hours)
+* Create visualizations for Question 3 (4 hours)
 
 **Week 7 (2/27 - 3/5):**
 
@@ -80,10 +80,12 @@ have already been filled in for you.]
 **Week 8 (3/6 - 3/12):** *Presentations in class on Thurs 3/9.*
 
 * Presentation peer review (1.5 hours)
+* Insert Data for 2023 Tournament (1 hour)
 
 **Week 9 (3/20 - 3/26):**
 
 * Poster prep (4 hours)
+* Compare Results for Question 2 (2 hours)
 
 **Week 10 (3/27 - 4/2):** *Poster Draft 1 due Monday 3/27*.
 *Peer feedback due Thursday 3/30*.
@@ -120,39 +122,12 @@ results.]
 **Final Exam Week (5/8):** *Final Presentations during final exam slot,
 Monday May 9th 3:20-6:40pm.* [Do not schedule any other tasks for this week.]
 
-## Some cool Quarto stuff
-
-[You can delete this section from your proposal.]
-
-For your reference, here's an example of a Python code cell in Quarto,
-along with a figure that gets generated, along with a caption and a label
-so that it can be referred to automatically as "Figure 1" (or whatever)
-in the writeup.
-
-For a demonstration of a line plot on a polar axis, see @fig-polar.
-
-```{python}
-#| label: fig-polar
-#| fig-cap: "A line plot on a polar axis"
-
-import numpy as np
-import matplotlib.pyplot as plt
-
-r = np.arange(0, 2, 0.01)
-theta = 2 * np.pi * r
-fig, ax = plt.subplots(
-  subplot_kw = {'projection': 'polar'} 
-)
-ax.plot(theta, r)
-ax.set_rticks([0.5, 1, 1.5, 2])
-ax.grid(True)
-plt.show()
-```
-
-Here's an example of citing a source [see @phil99, pp. 33-35]. Be sure the source information is entered in "BibTeX" form in the `references.bib` file.
-
 # References
 
-[The bibliography will automatically get generated. Any sources you
-cite in the document will be included. Other entries in the `.bib` file
-will not be included.]
+I'm not sure if we are meant to repost the same references from earlier, the description said it would autogenerate a list, but it did not so I put the websites I will be scraping from down here as well. 
+
+ESPN: [ESPN Stats](https://www.espn.com/mens-college-basketball/stats/team/_/view/opponent/table/offensive/sort/avgFreeThrowsMade/dir/asc) - Accessed 2/5/2023
+
+ ESPN: [ESPN BPI](https://www.espn.com/mens-college-basketball/bpi) - Accessed 2/5/2023
+
+ kenpom: [kenpom ratings](https://kenpom.com/) - Accessed 2/5/2023
