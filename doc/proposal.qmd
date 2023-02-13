@@ -14,44 +14,65 @@ jupyter: python3
 
 For my project I want to explore the world of predicting sports, specifically the NCAA Men's basketball Tournament. To do so my goal is to create an algorithm that can predict the chances that a team has to win against any given team. Using all sorts of metrics and data about tournaments past. I want to see if I can build a predicted model that will perform better than average human being, and would like to put it to the test in a month and a half, given all goes well. 
 
+The NCAA Tournament is a single elimination basketball tournament that includes 68 Division 1 college teams. One of the most popular events of the year for sports fans, many of whom fill out their predictions of what will happen. The single elimination format creates a lot of variance within the tournament, most notably the fact that there has yet to be a bracket that has correctly predicted each game, with a vast majority failing to remain perfect through the first day of the tournament. That is what inspired me to conduct this project, to see if a statistic based model can help us move towards creating better brackets.
+
 # Dataset
 
- ESPN: [ESPN Stats](https://www.espn.com/mens-college-basketball/stats/team/_/view/opponent/table/offensive/sort/avgFreeThrowsMade/dir/asc) - Accessed 2/5/2023
-
- ESPN: [ESPN BPI](https://www.espn.com/mens-college-basketball/bpi) - Accessed 2/5/2023
+ TeamRankings: [TeamRankings](https://www.teamrankings.com/ncb/) - Accessed 2/11/2023
 
  kenpom: [kenpom ratings](https://kenpom.com/) - Accessed 2/5/2023
 
-* oBPI: The team's offensive Basket Power Index rating
-* dBPI: The team's defensive Basket Power Index rating
-* BPI: Summation of oBPI and dBPI
+From: TeamRanking
+* Team: The name of the team
 * wins: The team's wins in the season
 * losses: The team's losses in the season
-* SOS: The team's Strength of Schedule in the season
 * ppg: The team's points scored per game
 * papg: The team's points allowed per game
-* to: The team's turnovers per game
-* toForced: The team's turnovers forced per game
-* Qwins: The team's quality wins in the season
-* Qlosees: The team's quality losses in the season
+From KenPom:
 * AdjEM: The team's Adjusted Efficiency Margin
 * AdjO: The team's Adjusted Offensive Efficiency
 * AdjD: The team's Adjusted Defensive Efficiency
 * AdjT: The team's Adjusted Tempo
 * Conf: The team's Conference
+* SOS: The team's Strength of Schedule in the season
+
+(Note: Each variable will have a 'vs' variant that will be used when a team is considered the opponent, the data and meaning will not change.)
+(Note: Every variable will be for the team's regular season peformance for that year.)
 ]
 
 # Data Acquisition and Processing
 
-The way I will be collecting the data will be through WebScraping from both ESPN and KenPom. After scraping is complete I will need to go through the data and see if anything must be cleaned before proceeding. It is likely that some variable names will need to be adjusted before use.
+The way I will be collecting the data will be through WebScraping from both TeamRankings and KenPom. After scraping is complete I will need to go through the data and see if anything must be cleaned before proceeding. It is likely that some variable names will need to be adjusted before use.
+
+The way TeamRankings formats their tables is by putting one table for each statistic. This allows for easy websraping, but tedious data processing as I will need to combine mutiple dataframes into one. Overall that process is easy as after dropping and renaming columns all it takes is a simple merge command.
+
+The more difficult half is going to be designing the final dataframe. The idea currently is to have 2 rows for each game, one for the perspective of the winner, the other for the loser. Each set of 2 rows will contain the same data points but flipped so the model can attribute the statistics on each side for each game. The last column will be an alternation set of 1s and 0s that represent Wins vs Losses and will be the column that we will try to predict.
+
+This dataframe frame will be fairly large as it should contain 1260 rows with data for 630 unique matchups. The current design is quite plausible in functionality as taking the frame of a game and a team allows the model to analyze both the statistics and the result of the tournament games.
 
 # Research Questions and Methodology
 
-1. Can a model based on data predict the March Madness tournament better than the average person? For this I will create a logistic regression model that will predict singular games which then will be combined to form a whole bracket. I will compare the results of the generated bracket to that of the ESPN "The People's Bracket" which is a culmination of every bracket submitted on ESPN, whichever bracket scores more points higher will be deemed the better bracket.
+1. Can a model based on data predict the March Madness tournament better than the average person? For this I will create a logistic regression model that will predict singular games which then will be combined to form a whole bracket. I will compare the results of the generated bracket to that of the ESPN "The People's Bracket" which is a culmination of every bracket submitted on ESPN, whichever bracket scores more points higher will be deemed the better bracket. 
 
-2. What statistics does a model consider to be the most important when it comes to a team's chances of winning, and after the results are shown did the model overestimate or underestimate certain statistics. For this question I will analyze the equation of the logistic regression taking notes of which variables are kept, which are used and the amount of weight the variables have. Once the results are done I can look at which variables the winning teams had and see if the model accurately projected their chances based on those variables.
+Once the bracket is released to the public before the start of the tournament you can begin the process of building a bracket. All of the matchups will then be predetermined thus you may input the statistics from the teams playing each other. Once a matchup is put in you can receive the win probabilty from the algorithm and you advance the team that the model gave the higher chance to win. Rinse and repeat until the bracket is completed.
 
-3. For the last question I would like to take a look at trends of teams making the tournaments. This will be a more historic view as opposed to a predictive model. I can make graphs to lay out trends of teams such as a line graph of points per game to see if that has changed in the past 10 years or so. A pie graph of which conferences teams are coming from. And more charts like those to analyze what teams that get into the tournament look like.
+2. Does the model prefer offensive teams or defensive teams? To analyze this I can look at the equation that the model uses and see which side of the game the model holds more weight on. Since each of the stats that compare offensive and defensive efficiency are on equal scales it will be comparable. For instance, the model will be using offensive and defensive efficiency as 2 separate variables, once the model is completed I can look at which of the two efficiencies hold a higher weight. 
+
+3. What is the difference in conferences that make the tournament versus conferences that make the Final Four? Every conference gets at least one team into the field of 68 teams, but most do not make it very far. I think it would be interesting to look at which conferences dominate the attendance at the pretigious Final Four.
+
+4. Another exploratory question can come from looking at teams grouped by seeds. One interesting graphic will be to show how often each seed has won over the last 10 years. I would expect the 1 seeds to have the highest win rate and for the win rates to gradually decrease as seed increases, but any anomalies would be an interesting find.
+
+5. How has average points per game and average points per game of tournament teams changed over the last 10 years? To accomplish this I can make a dual bar chart comparing both statistics for each year, averaging it out for every team that made the field.
+
+6. Which games project to be the most one-sided? For this question I can make a list that will show off which games the model gave one team a much higher chance than the other. This question will obviously have to be answered after the model is created as opposed to the previous few asked. 
+
+7. What is the distribution of offensive and defensive officiencies amongst teams who made the 2023 Tournament? To accomplish this I can make a scatterplot with one statistic on the x-axis and the other on the y-axis and it will show where each team fell in both statistics. Time permitting, I can also color them to indicate where each team lost in the tournament.
+
+8. Which states send the most teams to the NCAA Tournament? Similar to the conference question I think this question could be very interesting. I could use geocoding to separate the teams into their respective states and use a color gradient to determine how many teams are from each state.
+
+9. What is the relationship between Strength of Schedule and Seed? It is well known that you have to play good teams to earn a high seed (as seen by 31-3 Murray State getting a 7 seed last year). I would like to see how much a team's schedule affects where a team will be placed in the tournament. 
+
+10. 
 
 # Work plan
 
@@ -62,30 +83,37 @@ have already been filled in for you.]
 **Week 4 (2/6 - 2/12):** [Just an example: 
 
 * Webscraping Data (4 hours)
+* Rework Questions (2 hours)
+* Build Blueprint for Dataframe (2 hours)
 
 **Week 5 (2/13 - 2/19):**
 
-* Building model for Question 1 (4 hours)
-* Analyze model equation for Question 2 (1 hour)
+* Data Preprocessing (2 hours)
+* Dataframe Construction (8 hours)
+* Continue Webscraping (4 hours)
 
 **Week 6 (2/20 - 2/26):**
 
-* Test model for 2022 Tournament (2 hours)
-* Create visualizations for Question 3 (4 hours)
+* Continue Preprocessing (If necessary)
+* Create Model for Question 1 (4 hours)
+* Create visualizations for other Questions (4 hours)
 
 **Week 7 (2/27 - 3/5):**
 
 * Presentation prep and practice (4 hours)
+* Apply Model to a previous Tournament (4 hours)
+* Continue making visualizations (2 hours)
 
 **Week 8 (3/6 - 3/12):** *Presentations in class on Thurs 3/9.*
 
 * Presentation peer review (1.5 hours)
-* Insert Data for 2023 Tournament (1 hour)
+* Insert Data and Predict for 2023 Tournament (6 hours) (Done between 12th and 16th)
+* Complete any visualizations left (2 hours)
 
 **Week 9 (3/20 - 3/26):**
 
 * Poster prep (4 hours)
-* Compare Results for Question 2 (2 hours)
+* Gather Results and Assess for 2023 Bracket (2 hours)
 
 **Week 10 (3/27 - 4/2):** *Poster Draft 1 due Monday 3/27*.
 *Peer feedback due Thursday 3/30*.
@@ -126,8 +154,6 @@ Monday May 9th 3:20-6:40pm.* [Do not schedule any other tasks for this week.]
 
 I'm not sure if we are meant to repost the same references from earlier, the description said it would autogenerate a list, but it did not so I put the websites I will be scraping from down here as well. 
 
-ESPN: [ESPN Stats](https://www.espn.com/mens-college-basketball/stats/team/_/view/opponent/table/offensive/sort/avgFreeThrowsMade/dir/asc) - Accessed 2/5/2023
-
- ESPN: [ESPN BPI](https://www.espn.com/mens-college-basketball/bpi) - Accessed 2/5/2023
+ TeamRankings: [TeamRankings](https://www.teamrankings.com/ncb/) - Accessed 2/11/2023
 
  kenpom: [kenpom ratings](https://kenpom.com/) - Accessed 2/5/2023
