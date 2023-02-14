@@ -72,7 +72,11 @@ Once the bracket is released to the public before the start of the tournament yo
 
 9. What is the relationship between Strength of Schedule and Seed? It is well known that you have to play good teams to earn a high seed (as seen by 31-3 Murray State getting a 7 seed last year). I would like to see how much a team's schedule affects where a team will be placed in the tournament. 
 
-10. 
+10. Do some conferences earn higher seeds on average then others, if so what is the differnce? I want to look at the historic difference between seeding within conferences. I can build a horizontal bar chart or simply make a list to answer this question.
+
+11. Is there a relation between Adjusted Tempo and Points per game? In theory there should be as the faster a team makes the game the more points should be scored. To check this assumption I can scatterplot with the two variables and find the true conclusion.
+
+12. How much does strength of schedule affect wins and losses? I could make a new variable for win percentage so that I could again make a scatterplot to find the answer to this question. I would expect a downward trend such that as Strength of Schedule increases win percentage decreases.
 
 # Work plan
 
