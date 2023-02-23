@@ -60,7 +60,6 @@ oppPpg2019 = oppPpg2019.rename(columns={'2018': 'OppPPG'})
 ppg2019 = ppg2019.drop(ppg2019.columns[[0,3,4,5,6,7]], axis=1)
 ppg2019 = ppg2019.rename(columns={'2018': 'PPG'})
 
-
 url = "https://www.teamrankings.com/ncaa-basketball/stat/points-per-game?date=2018-04-03"
 
 html = requests.get(url).content
@@ -98,7 +97,6 @@ oppPpg2017 = oppPpg2017.rename(columns={'2016': 'OppPPG'})
 
 ppg2017 = ppg2017.drop(ppg2017.columns[[0,3,4,5,6,7]], axis=1)
 ppg2017 = ppg2017.rename(columns={'2016': 'PPG'})
-
 
 url = "https://www.teamrankings.com/ncaa-basketball/stat/points-per-game?date=2016-04-05"
 
@@ -156,6 +154,43 @@ oppPpg2014 = oppPpg2014.rename(columns={'2013': 'OppPPG'})
 
 ppg2014 = ppg2014.drop(ppg2014.columns[[0,3,4,5,6,7]], axis=1)
 ppg2014 = ppg2014.rename(columns={'2013': 'PPG'})
+
+url = "https://www.teamrankings.com/ncaa-basketball/stat/points-per-game?date=2013-04-08"
+
+html = requests.get(url).content
+ppg2013_list = pd.read_html(html)
+ppg2013 = ppg2013_list[0]
+
+url = "https://www.teamrankings.com/ncaa-basketball/stat/opponent-points-per-game?date=2013-04-08"
+
+html = requests.get(url).content
+oppPpg2013_list = pd.read_html(html)
+oppPpg2013 = oppPpg2013_list[0]
+
+
+oppPpg2013 = oppPpg2013.drop(oppPpg2013.columns[[0,3,4,5,6,7]], axis=1)
+oppPpg2013 = oppPpg2013.rename(columns={'2012': 'OppPPG'})
+
+ppg2013 = ppg2013.drop(ppg2013.columns[[0,3,4,5,6,7]], axis=1)
+ppg2013 = ppg2013.rename(columns={'2012': 'PPG'})
+
+url = "https://www.teamrankings.com/ncaa-basketball/stat/points-per-game?date=2012-04-02"
+
+html = requests.get(url).content
+ppg2012_list = pd.read_html(html)
+ppg2012 = ppg2012_list[0]
+
+url = "https://www.teamrankings.com/ncaa-basketball/stat/opponent-points-per-game?date=2012-04-02"
+
+html = requests.get(url).content
+oppPpg2012_list = pd.read_html(html)
+oppPpg2012 = oppPpg2012_list[0]
+
+oppPpg2012 = oppPpg2012.drop(oppPpg2012.columns[[0,3,4,5,6,7]], axis=1)
+oppPpg2012 = oppPpg2012.rename(columns={'2011': 'OppPPG'})
+
+ppg2012 = ppg2012.drop(ppg2012.columns[[0,3,4,5,6,7]], axis=1)
+ppg2012 = ppg2012.rename(columns={'2011': 'PPG'})
 
 url = "https://en.wikipedia.org/wiki/2022_NCAA_Division_I_men%27s_basketball_tournament"
 
@@ -232,7 +267,6 @@ MMteams2019 = MMteams2019.reset_index(drop=True)
 points2019 = ppg2019.merge(oppPpg2019)
 
 points2019 = points2019.rename(columns={'Team': 'School'})
-
 
 points2019['School'] = points2019['School'].apply(lambda x: x[:-2] + 'State' if x[-2:] == 'St' else x)
 
@@ -372,7 +406,6 @@ MMteams2015 = pd.DataFrame()
 MMteams2015 = pd.concat([MMteams_list[3], MMteams_list[4], MMteams_list[5], MMteams_list[6]])
 MMteams2015 = MMteams2015.reset_index(drop=True)
 
-
 points2015 = ppg2015.merge(oppPpg2015)
 
 points2015 = points2015.rename(columns={'Team': 'School'})
@@ -397,7 +430,6 @@ points2015.loc[111, 'School'] = "Robert Morris"
 
 MMteams2015 = pd.merge(MMteams2015, points2015)
 MMteams2015['year'] = 2015
-
 
 url = "https://en.wikipedia.org/wiki/2014_NCAA_Division_I_men%27s_basketball_tournament"
 
@@ -434,7 +466,80 @@ points2014.loc[44, 'School'] = "Massachusetts"
 MMteams2014 = pd.merge(MMteams2014, points2014)
 MMteams2014['year'] = 2014
 
-MMteams = pd.concat([MMteams2022, MMteams2021, MMteams2019, MMteams2018, MMteams2017, MMteams2016, MMteams2015, MMteams2014], ignore_index=True)
+url = "https://en.wikipedia.org/wiki/2013_NCAA_Division_I_men%27s_basketball_tournament"
+
+html = requests.get(url).content
+MMteams_list = pd.read_html(html, header=0)
+
+MMteams2013 = pd.DataFrame()
+MMteams2013 = pd.concat([MMteams_list[3], MMteams_list[4],MMteams_list[5], MMteams_list[6]])
+MMteams2013 = MMteams2013.reset_index(drop=True)
+
+points2013 = ppg2013.merge(oppPpg2013)
+
+points2013 = points2013.rename(columns={'Team': 'School'})
+
+points2013['School'] = points2013['School'].apply(lambda x: x[:-2] + 'State' if x[-2:] == 'St' else x)
+
+points2013.loc[15, 'School'] = "North Carolina"
+points2013.loc[49, 'School'] = "South Dakota State"
+points2013.loc[9, 'School'] = 'Northwestern State'
+points2013.loc[51, 'School'] = "Florida Gulf Coast"
+points2013.loc[177, 'School'] = "Western Kentucky"
+points2013.loc[6, 'School'] = "Ole Miss"
+points2013.loc[106, 'School'] = "Miami"
+points2013.loc[215, 'School'] = "James Madison"
+points2013.loc[2, 'School'] = "Long Island"
+points2013.loc[78, 'School'] = "Middle Tennessee"
+points2013.loc[29, 'School'] = "Saint Mary's (CA)"
+points2013.loc[163, 'School'] = "New Mexico State"
+points2013.loc[288, 'School'] = "North Carolina A&T"
+
+MMteams2013 = pd.merge(MMteams2013, points2013)
+MMteams2013['year'] = 2013
+url = "https://en.wikipedia.org/wiki/2012_NCAA_Division_I_men%27s_basketball_tournament"
+
+html = requests.get(url).content
+MMteams_list = pd.read_html(html)
+
+MMteams2012 = pd.DataFrame()
+MMteams_list[4].columns = ['Seed', 'School', 'Conference', 'Record', 'Berth type', 'Overall rank']
+MMteams_list[5].columns = ['Seed', 'School', 'Conference', 'Record', 'Berth type', 'Overall rank']
+MMteams_list[6].columns = ['Seed', 'School', 'Conference', 'Record', 'Berth type', 'Overall rank']
+MMteams_list[7].columns = ['Seed', 'School', 'Conference', 'Record', 'Berth type', 'Overall rank']
+MMteams2012 = pd.concat([MMteams_list[4],MMteams_list[5], MMteams_list[6], MMteams_list[7]])
+MMteams2012 = MMteams2012.reset_index(drop=True)
+
+points2012 = ppg2012.merge(oppPpg2012)
+
+points2012 = points2012.rename(columns={'Team': 'School'})
+
+points2012['School'] = points2012['School'].apply(lambda x: x[:-2] + 'State' if x[-2:] == 'St' else x)
+
+points2012.loc[94, 'School'] = "Southern Miss"
+points2012.loc[85, 'School'] = "West Virginia"
+points2012.loc[96, 'School'] = 'St. Bonaventure'
+points2012.loc[171, 'School'] = "Loyola"
+points2012.loc[8, 'School'] = "UNC Asheville"
+points2012.loc[2, 'School'] = "North Carolina"
+points2012.loc[42, 'School'] = "Saint Mary's"
+points2012.loc[324, 'School'] = "South Florida"
+points2012.loc[100, 'School'] = "Detroit Mercy"
+points2012.loc[13, 'School'] = "New Mexico State"
+points2012.loc[141, 'School'] = "Mississippi Valley State"
+points2012.loc[233, 'School'] = "Western Kentucky"
+points2012.loc[43, 'School'] = "Long Beach State"
+points2012.loc[22, 'School'] = "South Dakota State"
+
+MMteams2012 = pd.merge(MMteams2012, points2012)
+MMteams2012['year'] = 2012
+
+MMteams = pd.concat([MMteams2022, MMteams2021, MMteams2019, MMteams2018, MMteams2017, MMteams2016, MMteams2015, MMteams2014, MMteams2013, MMteams2012], ignore_index=True)
+
+MMteams['Overall Seed'] = MMteams['Overall rank'].combine_first(MMteams['Overall Seed'])
+MMteams['Overall Seed'] = MMteams['Overall rank[4]'].combine_first(MMteams['Overall Seed'])
+MMteams = MMteams.drop(['Overall rank', 'Coach', 'Overall rank[4]'], axis=1)
+
 
 MMteams['Conference'] = MMteams['Conference'].str.replace('Pac-12', 'Pac–12')
 MMteams['Conference'] = MMteams['Conference'].str.replace('ASUN', 'Atlantic Sun')
@@ -447,16 +552,47 @@ MMteams['Conference'] = MMteams['Conference'].str.replace('NEC', 'Northeast')
 MMteams['Conference'] = MMteams['Conference'].str.replace('Mid American', 'MAC')
 MMteams['Conference'] = MMteams['Conference'].str.replace('MVC', 'Missouri Valley')
 
-
-
-n = 12
+n = 15
 conference_counts = MMteams['Conference'].value_counts()
 print(conference_counts)
 top_conferences = conference_counts[:n].index.tolist()
-MMteams.loc[~MMteams['Conference'].isin(top_conferences), 'Conference'] = 'Other'
+MMteams.loc[~MMteams['Conference'].isin(top_conferences), 'Conference'] = '1 Bid Conferences'
 conference_counts = MMteams['Conference'].value_counts()
 
 plt.figure(figsize=(8,8))
 plt.pie(conference_counts, labels=conference_counts.index, autopct='%1.1f%%')
 plt.title('Conference Distribution')
+plt.show()
+
+MMteams['PPG'] = MMteams['PPG'].astype(float)
+MMteams['OppPPG'] = MMteams['OppPPG'].astype(float)
+
+
+grouped = MMteams.groupby('year')[['PPG', 'OppPPG']].mean()
+
+grouped.plot(kind='bar', width=0.8, figsize=(8, 6))
+plt.xlabel('Year')
+plt.ylabel('Points per game')
+plt.title('Average PPG and OppPPG by year')
+plt.legend(['PPG', 'OppPPG'])
+plt.show()
+
+MMteams['Seed'] = MMteams['Seed'].astype(str)
+
+MMteams['Seed'] = MMteams['Seed'].str.replace('*', '')
+MMteams['Seed'] = MMteams['Seed'].str.replace('#', '')
+
+MMteams['Seed'] = MMteams['Seed'].astype(float)
+
+avg_seed = MMteams.groupby('Conference')['Seed'].mean()
+avg_seed_sorted = avg_seed.sort_values(ascending=False)
+
+fig, ax = plt.subplots(figsize=(10, 10))
+
+ax.barh(avg_seed_sorted.index, avg_seed_sorted.values)
+
+ax.set_title('Average Seed by Conference')
+ax.set_xlabel('Conference')
+ax.set_ylabel('Average Seed')
+ax.tick_params(axis='x', rotation=10)
 plt.show()
