@@ -126,7 +126,7 @@ Westminster (UT),70,BYU,100
 Ga. Tech,65,Iowa,81
 Virginia,70,Michigan,68
 La Sierra,49,Cal-Baker.,90
-UC Irvine,69,San Diego St,72
+UC Irvine,69,San Diego St.,72
 UC Davis,81,Boston U.,70
 Dartmouth,49,Grambling,73
 Arlington Bapt,46,Texas A&M-Commerce,101
@@ -384,7 +384,7 @@ SC State,74,Wake Forest,105
 Utah,49,Miss. St.,52
 Cal-Baker.,67,UTEP,68
 Fresno St.,57,Washington,62
-Arkansas,78,San Diego St,74
+Arkansas,78,San Diego St.,74
 N. Alabama,71,UCSB,89
 Pacific Lutheran University,53,Seattle,89
 Minnesota,62,UNLV,71
@@ -458,7 +458,7 @@ Mt St Mary's,69,Pacific,65
 UC Riverside,70,Wright St.,65
 Westcliff,57,CS Fullerton,78
 Sacramento St.,71,UC Davis,82
-San Diego St,70,Arizona,87
+San Diego St.,70,Arizona,87
 Illinois St.,61,LSU,77
 Toledo,71,UMKC,83
 Detroit,88,Bryant,98
@@ -506,7 +506,7 @@ Miss. St.,58,Marquette,55
 N. Arizona,48,Texas,73
 Georgia,66,Saint Joseph's,53
 Hampton,66,UCSB,79
-Ohio St.,77,San Diego St,88
+Ohio St.,77,San Diego St.,88
 SC Upstate,56,Air Force,83
 Washington St.,82,E. Washington,56
 Temple,72,St. John's,78
@@ -536,7 +536,7 @@ Ga. Southern,63,W. Michigan,57
 Montana St.,81,North Dakota,71
 Radford,90,Army,75
 Siena,59,Harvard,69
-Voorhees College,61,Jacksonville,91
+Voorhees,61,Jacksonville,91
 Youngstown St.,67,Navy,80
 Lamar,57,McNeese St.,66
 SE Louisiana,74,App. St.,83
@@ -852,7 +852,7 @@ Fairfield,65,Xavier,78
 FIU,74,NC State,107
 Memphis,84,Saint Louis,90
 Montana St.,51,Oregon,81
-San Diego St,74,Stanford,62
+San Diego St.,74,Stanford,62
 Sul Ross St.,59,UTEP,99
 Green Bay,45,Wisconsin,56
 Alabama St.,57,San Jose St.,70
@@ -1107,7 +1107,7 @@ N.J. Tech,43.0,Cal Baptist,59.0
 Pepperdine,71.0,CS Fullerton,74.0
 Portland St.,91.0,Portland,98.0
 W. Illinois,74.0,DePaul,86.0
-BYU,75.0,San Diego St,82.0
+BYU,75.0,San Diego St.,82.0
 LBSU,69.0,UCLA,93.0
 UC Irvine,69.0,Oregon,56.0
 North Florida,67.0,Washington,75.0
@@ -1389,7 +1389,7 @@ FGCU,74,USC,61
 Nicholls St.,75,Arizona,117
 Bethesda,59,Cal Poly,94
 Chapman,50,UC Irvine,96
-CS Fullerton,57,San Diego St,80
+CS Fullerton,57,San Diego St.,80
 E. Washington,72,Santa Clara,84
 Florida A&M,45,Oregon,80
 Fresno Pacif,56,Fresno St.,69
@@ -1494,7 +1494,7 @@ N. Arizona,60,Weber St.,76
 New Mexico,76,Wyoming,75
 Queens,83,E. Kentucky,88
 Rice,72,UTEP,67
-San Diego St,76,UNLV,67
+San Diego St.,76,UNLV,67
 San Jose St.,78,Colo. St.,70
 Stonehill College,72,St. Fran.-Pa.,73
 Tarleton St.,63,Abilene Chr.,69
@@ -1675,7 +1675,7 @@ So. Utah,79.0,N. Mex. St.,75.0
 Xavier,84.0,St. John's,79.0
 Boise St.,72.0,Nevada,74.0
 UNLV,72.0,San Jose St.,75.0
-Air Force,55.0,San Diego St,71.0
+Air Force,55.0,San Diego St.,71.0
 Wyoming,53.0,Fresno St.,58.0
 St Elizabeth,51,N.J. Tech,79
 Georgia SW,73,Jax. State,78
@@ -1880,7 +1880,7 @@ Cal Poly,43,San Jose St.,65
 Fresno St.,56,Cal-Baker.,48
 Harvard,62,UC Irvine,57
 San Diego,92,UC Riverside,84
-UC San Diego,46,San Diego St,62
+UC San Diego,46,San Diego St.,62
 Utah Valley,77,Oregon,72
 Bob Jones U,55,Gardner-Webb,116
 Fairmont State,74,Bowling Green,93
@@ -2189,7 +2189,7 @@ North Central,48,North Dakota,99
 N. Illinois,67,Gonzaga,88
 Mount Marty,56,S. Dak. St.,85
 UC San Diego,58,San Diego,84
-Kennesaw St.,54,San Diego St,88
+Kennesaw St.,54,San Diego St.,88
 SD Christian,68,UCSB,81
 New Mexico,67,San Fran.,64
 LMU,67,Utah St.,79
@@ -2273,7 +2273,7 @@ Denver,64,UCLA,87
 Kent St.,67,Clev. St.,58
 Lamar,59,So. Miss,95
 SC State,84,SC Upstate,89
-San Diego St,61,Saint Mary's,68
+San Diego St.,61,Saint Mary's,68
 Texas A&M-Commerce,64,Abilene Chr.,83
 Valparaiso,61,Ole Miss,98
 W. Illinois,79,E. Illinois,75
@@ -2500,7 +2500,7 @@ Trevecca Naz,49,Lipscomb,87
 Kent St.,66,Gonzaga,73
 Simon Fraser,35,N. Mex. St.,77
 N. Dak. St.,67,Portland,62
-Troy,55,San Diego St,60
+Troy,55,San Diego St.,60
 Maine,61,Marist,62
 Bryant,71,Cincinnati,97
 Canisius,60,Iona,90
@@ -2675,7 +2675,7 @@ UT Arlington,59,LSU,63
 Illinois,66,Maryland,71
 N. Illinois,47,Idaho,84
 Bethesda,76,UC San Diego,81
-Occidental,57,San Diego St,95
+Occidental,57,San Diego St.,95
 Texas A&M-Commerce,53,Hawaii,51
 Okla. St.,64,UConn,74
 Cornell,74,Delaware,67
@@ -2732,7 +2732,7 @@ Kentucky,75,Ole Miss,66
 UNLV,83,Colo. St.,71
 West Virginia,72,TCU,76
 Fresno St.,62,Wyoming,85
-San Diego St,66,Nevada,75
+San Diego St.,66,Nevada,75
 Chicago St.,76,The Citadel,75
 Loyola-Md.,63,Colgate,76
 NC Central,71,Norfolk St.,77
@@ -2907,7 +2907,7 @@ South Dakota,81,St. Thomas (MN),67
 Utah,56,Oregon,68
 Vanderbilt,66,Texas A&M,72
 CSNorthridge,56,UC Irvine,81
-San Jose St.,51,San Diego St,72
+San Jose St.,51,San Diego St.,72
 California,46,Stanford,75
 CS Fullerton,65,Cal Poly,36
 Saint Mary's,57,BYU,56
@@ -3044,7 +3044,7 @@ St. John's,76,Creighton,104
 Texas A&M,79,Auburn,63
 Tulane,95,Wichita St.,90
 Chicago St.,65,Stanford,72
-Utah St.,75,San Diego St,85
+Utah St.,75,San Diego St.,85
 Penn St.,45,Rutgers,65
 Bowling Green,83,C. Michigan,61
 Buffalo,91,Ball St.,65
@@ -3253,7 +3253,7 @@ Sacramento St.,48.0,Weber St.,50.0
 Cal-Baker.,58.0,UCSB,76.0
 CS Fullerton,66.0,CSNorthridge,69.0
 Gonzaga,99.0,Pacific,90.0
-San Diego St,70.0,Air Force,60.0
+San Diego St.,70.0,Air Force,60.0
 Tarleton St.,48.0,Cal Baptist,77.0
 USC,77.0,Arizona St.,69.0
 Oregon,64.0,Stanford,71.0
@@ -3384,7 +3384,7 @@ Oklahoma,56.0,Okla. St.,72.0
 Providence,75.0,Marquette,83.0
 Utah Tech,85.0,Grand Canyon,89.0
 Oregon,87.0,California,58.0
-San Diego St,82.0,Colo. St.,76.0
+San Diego St.,82.0,Colo. St.,76.0
 Ole Miss,70,South Carolina,58
 Akron,69,C. Michigan,51
 Boston College,64,N. Carolina,72
@@ -3607,7 +3607,7 @@ W. Illinois,60,UMKC,52
 Miss. St.,63,Auburn,69
 UT Martin,66,So. Indiana,80
 Idaho St.,55,Montana,84
-New Mexico,76,San Diego St,67
+New Mexico,76,San Diego St.,67
 Pepperdine,81,BYU,91
 Sam Houston,78,Utah Tech,53
 Santa Clara,92,Pacific,81
@@ -3781,7 +3781,7 @@ N. Carolina,58,Virginia,65
 Vanderbilt,68,Tennessee,77
 Fresno St.,64,San Jose St.,74
 Wyoming,63,Utah St.,83
-Nevada,65,San Diego St,74
+Nevada,65,San Diego St.,74
 Alabama St.,76,Alcorn St.,92
 SC State,85,Morgan St.,90
 Colgate,77,Army,75
@@ -3888,7 +3888,7 @@ Northeastern,79,Hampton,63
 Nevada,67,San Jose St.,40
 Samford,70,UNCG,68
 SC State,73,Coppin St.,85
-San Diego St,80,Wyoming,75
+San Diego St.,80,Wyoming,75
 St. Fran.-Pa.,68,Wagner,63
 St. Bona.,55,Saint Louis,78
 Texas So.,66,Ark.-Pine Bluff,70
@@ -4212,7 +4212,7 @@ Villanova,76,Seton Hall,72
 Arkansas,57,Tennessee,75
 Michigan St.,80,Nebraska,67
 South Carolina,68,Miss. St.,74
-San Diego St,60,Boise St.,66
+San Diego St.,60,Boise St.,66
 Texas A&M,69,Ole Miss,61
 Texas Tech,63,Kansas,67
 Va. Tech,71,Louisville,54
@@ -4387,7 +4387,7 @@ Sacramento St.,72,Montana,74
 Saint Mary's,68,Gonzaga,77
 Oregon,69,Oregon St.,67
 San Fran.,61,BYU,87
-San Diego St,73,New Mexico,71
+San Diego St.,73,New Mexico,71
 Santa Clara,81,San Diego,63
 UC Irvine,67,Hawaii,72
 UCSB,87,UC San Diego,71
@@ -4560,7 +4560,7 @@ Texas Tech,74,Oklahoma,63
 Georgia,65,Arkansas,97
 Utah St.,65,Wyoming,55
 San Jose St.,51,Nevada,66
-Colo. St.,58,San Diego St,77
+Colo. St.,58,San Diego St.,77
 UC San Diego,66,UC Davis,76
 Louisville,62,Duke,79
 Okla. St.,67,West Virginia,85
@@ -4884,7 +4884,7 @@ LBSU,76.0,UC Riverside,88.0
 Seattle,63.0,Cal Baptist,84.0
 UC Irvine,70.0,UCSB,59.0
 Oregon,71.0,Washington,72.0
-San Diego St,45.0,Fresno St.,43.0
+San Diego St.,45.0,Fresno St.,43.0
 Georgetown,68,Seton Hall,76
 Vanderbilt,75,South Carolina,64
 Akron,78,E. Michigan,51
@@ -5019,7 +5019,7 @@ Maine,50.0,N.J. Tech,65.0
 Merrimack,75.0,St. Fran.-Pa.,68.0
 Middle Tenn.,69.0,UAB,92.0
 Portland St.,88.0,N. Arizona,87.0
-UNLV,71.0,San Diego St,82.0
+UNLV,71.0,San Diego St.,82.0
 UTEP,77.0,UTSA,66.0
 Wisconsin,63.0,Nebraska,73.0
 W. Michigan,53.0,N. Illinois,81.0
@@ -5230,7 +5230,7 @@ LSU,53,Miss. St.,64
 N. Mex. St.,67,Grand Canyon,78
 Oklahoma,72,Baylor,82
 Saint Joseph's,83,Loyola Chi.,71
-San Diego St,63,Utah St.,61
+San Diego St.,63,Utah St.,61
 Utah Tech,71,Seattle,75
 UNLV,69,Wyoming,59
 Marquette,72.0,UConn,87.0
@@ -5451,7 +5451,7 @@ Siena,66,Manhattan,71
 St. Peter's,61,Rider,82
 VCU,73,Saint Louis,65
 Canisius,73,Niagara,76
-Boise St.,52,San Diego St,72
+Boise St.,52,San Diego St.,72
 Kent St.,55,Akron,67
 Air Force,52,Nevada,72
 Fresno St.,82,UNLV,79
@@ -5576,3 +5576,447 @@ SMU,52.0,Tulane,74.0
 Abilene Chr.,83.0,Seattle,68.0
 So. Utah,72.0,Cal Baptist,71.0
 New Mexico,73.0,Utah St.,84.0
+Yale,65.0,Princeton,74.0
+Dayton,56.0,VCU,68.0
+Texas A&M,63.0,Alabama,82.0
+Memphis,75.0,Houston,65.0
+Penn St.,65.0,Purdue,67.0
+Utah St.,72.0,Boise St.,62.0
+Cornell,60.0,Yale,80.0
+UMass Lowell,59.0,Vermont,72.0
+Missouri,61.0,Alabama,72.0
+Norfolk St.,64.0,Howard,65.0
+Ohio St.,66.0,Purdue,80.0
+Saint Louis,78.0,VCU,90.0
+Penn,70.0,Princeton,77.0
+Cincinnati,48.0,Houston,69.0
+Fordham,68.0,Dayton,78.0
+Vanderbilt,75.0,Texas A&M,87.0
+Penn St.,77.0,Indiana,73.0
+Texas So.,61.0,Grambling,58.0
+Tulane,54.0,Memphis,94.0
+Texas,76.0,Kansas,56.0
+Utah St.,57.0,San Diego St.,62.0
+Xavier,51.0,Marquette,65.0
+Kent St.,93.0,Toledo,78.0
+Marist,55.0,Iona,76.0
+Duke,59.0,Virginia,49.0
+UAB,56.0,FAU,78.0
+CS Fullerton,62.0,UCSB,72.0
+Arizona,61.0,UCLA,59.0
+Grand Canyon,84.0,So. Utah,66.0
+Rutgers,65.0,Purdue,70.0
+Middle Tenn.,65.0,FAU,68.0
+East Carolina,46.0,Houston,60.0
+Miss. St.,49.0,Alabama,72.0
+Ohio St.,68.0,Michigan St.,58.0
+Texas So.,74.0,Alabama A&M,61.0
+UAB,76.0,North Texas,69.0
+Tennessee,71.0,Missouri,79.0
+Temple,54.0,Cincinnati,84.0
+Ohio,75.0,Toledo,82.0
+Niagara,59.0,Iona,71.0
+Md.-E. Shore,55.0,Howard,74.0
+Penn St.,67.0,Northwestern,65.0
+UConn,68.0,Marquette,70.0
+Arkansas,61.0,Texas A&M,67.0
+Duke,85.0,Miami,78.0
+Iowa St.,58.0,Kansas,71.0
+UCF,76.0,Memphis,81.0
+Akron,73.0,Kent St.,79.0
+Marist,69.0,St. Peter's,57.0
+Norfolk St.,72.0,NC Central,65.0
+Creighton,60.0,Xavier,82.0
+CS Fullerton,83.0,UC Irvine,80.0
+Grand Canyon,78.0,Sam Houston,75.0
+Oregon,56.0,UCLA,75.0
+Wichita St.,76.0,Tulane,82.0
+Maryland,60.0,Indiana,70.0
+Clemson,56.0,Virginia,76.0
+Jackson St.,69.0,Grambling,78.0
+San Jose St.,49.0,San Diego St.,64.0
+Vanderbilt,80.0,Kentucky,73.0
+TCU,60.0,Texas,66.0
+So. Utah,89.0,Utah Valley,88.0
+Arizona St.,59.0,Arizona,78.0
+UC Riverside,87.0,UCSB,92.0
+Miami (Ohio),75.0,Toledo,91.0
+Davidson,53.0,VCU,71.0
+Rutgers,62.0,Michigan,50.0
+St. John's,70.0,Marquette,72.0
+Wake Forest,72.0,Miami,74.0
+East Carolina,73.0,South Florida,58.0
+Iowa St.,78.0,Baylor,72.0
+Miss. St.,69.0,Florida,68.0
+Ohio,90.0,Ball St.,70.0
+George Mason,54.0,Saint Louis,82.0
+Ohio St.,73.0,Iowa,69.0
+Pittsburgh,69.0,Duke,96.0
+SMU,70.0,UCF,76.0
+Cal Baptist,51.0,Sam Houston,64.0
+Colorado,69.0,UCLA,80.0
+Colo. St.,61.0,San Diego St.,64.0
+Cal-Baker.,51.0,UC Irvine,75.0
+Providence,66.0,UConn,73.0
+Prairie View,60.0,Jackson St.,62.0
+West Virginia,61.0,Kansas,78.0
+Ole Miss,55.0,Tennessee,70.0
+N. Illinois,57.0,Kent St.,76.0
+Saint Joseph's,54.0,Dayton,60.0
+Grand Canyon,84.0,Seattle,79.0
+Hawaii,60.0,CS Fullerton,62.0
+San Jose St.,81.0,Nevada,77.0
+Washington St.,70.0,Oregon,75.0
+Morgan St.,64.0,Md.-E. Shore,80.0
+Buffalo,77.0,Akron,101.0
+Penn St.,79.0,Illinois,76.0
+W. Kentucky,51.0,FAU,75.0
+Arkansas,76.0,Auburn,73.0
+Charlotte,65.0,Middle Tenn.,66.0
+DePaul,84.0,Xavier,89.0
+Marist,75.0,Quinnipiac,59.0
+Okla. St.,47.0,Texas,60.0
+Tulsa,63.0,Wichita St.,81.0
+N. Carolina,59.0,Virginia,68.0
+La Salle,61.0,Fordham,69.0
+Coppin St.,56.0,Norfolk St.,73.0
+Boise St.,87.0,UNLV,76.0
+Cal Poly,54.0,UCSB,64.0
+La. Tech,46.0,North Texas,74.0
+Stanford,84.0,Arizona,95.0
+Tarleton St.,58.0,Utah Valley,72.0
+Minnesota,54.0,Maryland,70.0
+Alabama A&M,77.0,Southern U.,63.0
+LSU,68.0,Vanderbilt,77.0
+NC State,54.0,Clemson,80.0
+Niagara,71.0,Siena,65.0
+Rice,60.0,UAB,87.0
+TCU,80.0,Kansas St.,67.0
+Villanova,74.0,Creighton,87.0
+Arizona St.,77.0,USC,72.0
+New Mexico,76.0,Utah St.,91.0
+UC Davis,52.0,UC Riverside,68.0
+Utah Tech,75.0,So. Utah,76.0
+St. Bona.,54.0,Davidson,65.0
+Wake Forest,77.0,Syracuse,74.0
+Fresno St.,65.0,Colo. St.,67.0
+Richmond,57.0,George Mason,62.0
+Ga. Tech,81.0,Pittsburgh,89.0
+Bethune-Cook.,72.0,Grambling,87.0
+Butler,63.0,St. John's,76.0
+Colorado,74.0,Washington,68.0
+Air Force,70.0,UNLV,78.0
+Northwestern St.,71.0,Texas A&M-CC,75.0
+Saint Joseph's,87.0,George Wash.,76.0
+California,52.0,Washington St.,69.0
+DePaul,66.0,Seton Hall,65.0
+SC State,55.0,Howard,91.0
+Ohio St.,65.0,Wisconsin,57.0
+UTEP,67.0,W. Kentucky,73.0
+Boston College,61.0,N. Carolina,85.0
+Ole Miss,67.0,South Carolina,61.0
+Mt St Mary's,54.0,Iona,74.0
+Texas Tech,62.0,West Virginia,78.0
+Lafayette,61.0,Colgate,79.0
+La Salle,81.0,Duquesne,70.0
+Wyoming,76.0,New Mexico,87.0
+Georgetown,48.0,Villanova,80.0
+Delaware St.,59.0,NC Central,89.0
+La. Tech,81.0,FIU,76.0
+Minnesota,78.0,Nebraska,75.0
+Stanford,73.0,Utah,62.0
+LSU,72.0,Georgia,67.0
+Oklahoma,49.0,Okla. St.,57.0
+St. Peter's,70.0,Rider,62.0
+Texas So.,66.0,Alcorn St.,62.0
+Va. Tech,77.0,NC State,97.0
+N. Arizona,78.0,Montana St.,85.0
+UTSA,71.0,Rice,72.0
+Oregon St.,57.0,Arizona St.,63.0
+Massachusetts,38.0,Richmond,71.0
+Ga. Tech,61.0,Florida St.,60.0
+Loyola Chi.,67.0,Saint Joseph's,72.0
+Abilene Chr.,62.0,Cal Baptist,69.0
+Louisville,62.0,Boston College,80.0
+Rhode Island,56.0,La Salle,73.0
+Canisius,66.0,Mt St Mary's,67.0
+UT Arlington,77.0,Grand Canyon,82.0
+New Hamp.,64.0,UMass Lowell,75.0
+McNeese St.,63.0,Texas A&M-CC,80.0
+Binghamton,57.0,Vermont,79.0
+FDU,66.0,Merrimack,67.0
+UNCW,58.0,Charleston,63.0
+N. Kentucky,63.0,Clev. St.,61.0
+Notre Dame,64.0,Va. Tech,67.0
+St. Peter's,70.0,Fairfield,52.0
+N. Arizona,83.0,Montana,71.0
+CSNorthridge,47.0,Cal-Baker.,51.0
+Gonzaga,77.0,Saint Mary's,51.0
+N. Dak. St.,58.0,Oral Roberts,92.0
+New Orleans,70.0,Northwestern St.,74.0
+UT-Rio Grande Valley,70.0,Tarleton St.,74.0
+Marist,61.0,Manhattan,50.0
+Weber St.,58.0,Montana St.,60.0
+Cal Poly,88.0,LBSU,68.0
+Utah Tech,80.0,SF Austin,76.0
+McNeese St.,77.0,Nicholls St.,71.0
+UNCW,79.0,Hofstra,73.0
+Chattanooga,79.0,Furman,88.0
+N. Kentucky,75.0,Youngstown St.,63.0
+South Alabama,66.0,Louisiana,71.0
+St. Thomas (MN),65.0,Oral Roberts,70.0
+Idaho St.,74.0,Montana,83.0
+BYU,69.0,Saint Mary's,76.0
+New Orleans,82.0,SE Louisiana,78.0
+Towson,72.0,Charleston,77.0
+N. Dak. St.,89.0,S. Dak. St.,79.0
+Clev. St.,93.0,Milwaukee,80.0
+Sacramento St.,64.0,Weber St.,70.0
+San Fran.,73.0,Gonzaga,84.0
+San Fran.,93.0,Santa Clara,87.0
+Houston,67.0,Memphis,65.0
+Maryland,64.0,Penn St.,65.0
+William & Mary,46.0,Hofstra,94.0
+Illinois,71.0,Purdue,76.0
+Campbell,73.0,UNC-Ash.,77.0
+Army,74.0,Colgate,91.0
+Drake,77.0,Bradley,51.0
+East Carolina,58.0,UCF,84.0
+Nebraska,81.0,Iowa,77.0
+South Florida,49.0,Wichita St.,69.0
+SMU,74.0,Cincinnati,97.0
+Temple,82.0,Tulane,83.0
+Drexel,68.0,UNCW,73.0
+Liberty,66.0,Kennesaw St.,67.0
+American,76.0,Lafayette,84.0
+W. Carolina,80.0,Furman,83.0
+Michigan,73.0,Indiana,75.0
+South Alabama,75.0,James Madison,66.0
+Stony Brook,52.0,Charleston,74.0
+Texas A&M-Commerce,78.0,McNeese St.,79.0
+St. Thomas (MN),67.0,W. Illinois,60.0
+Chattanooga,74.0,Wofford,62.0
+N. Arizona,81.0,E. Washington,80.0
+Northwestern,65.0,Rutgers,53.0
+Wisconsin,71.0,Minnesota,67.0
+Delaware,60.0,Towson,86.0
+New Orleans,90.0,Houston Chr.,69.0
+Texas St.,58.0,Louisiana,64.0
+South Dakota,68.0,N. Dak. St.,70.0
+N. Colorado,73.0,Montana St.,84.0
+Alabama,61.0,Texas A&M,67.0
+Elon,51.0,William & Mary,73.0
+Iowa St.,73.0,Baylor,58.0
+Mercer,58.0,Furman,73.0
+Ohio St.,78.0,Michigan St.,84.0
+Penn,69.0,Princeton,77.0
+Seton Hall,82.0,Providence,58.0
+SC Upstate,62.0,UNC-Ash.,66.0
+George Mason,62.0,Richmond,60.0
+South Alabama,78.0,So. Miss,61.0
+Bryant,60.0,New Hamp.,67.0
+UAB,93.0,Charlotte,91.0
+Georgia,55.0,South Carolina,61.0
+Columbia,73.0,Cornell,87.0
+Duquesne,60.0,Fordham,87.0
+Harvard,82.0,Dartmouth,87.0
+Kansas St.,81.0,West Virginia,89.0
+Loyola Chi.,76.0,La Salle,73.0
+Louisville,60.0,Virginia,75.0
+Mt St Mary's,74.0,Manhattan,69.0
+Middle Tenn.,65.0,UTEP,77.0
+Siena,72.0,St. Peter's,73.0
+St. John's,94.0,Marquette,96.0
+Tennessee,70.0,Auburn,79.0
+Kentucky,88.0,Arkansas,79.0
+ETSU,57.0,W. Carolina,69.0
+Ga. Tech,73.0,Boston College,65.0
+Monmouth,45.0,Drexel,64.0
+St. Bona.,60.0,Massachusetts,71.0
+Campbell,72.0,Radford,71.0
+FIU,90.0,Rice,83.0
+TCU,60.0,Oklahoma,74.0
+Troy,72.0,James Madison,75.0
+W. Kentucky,33.0,North Texas,67.0
+Indiana St.,70.0,Bradley,71.0
+Ole Miss,77.0,Missouri,82.0
+Niagara,68.0,Canisius,81.0
+Florida St.,60.0,Va. Tech,82.0
+Kansas,59.0,Texas,75.0
+LBSU,92.0,UC Davis,93.0
+Maine,54.0,UMass Lowell,85.0
+San Jose St.,63.0,Air Force,61.0
+Stanford,68.0,Oregon,73.0
+Texas So.,74.0,Prairie View,78.0
+Florida A&M,70.0,Bethune-Cook.,91.0
+VCU,74.0,George Wash.,68.0
+UNLV,69.0,Nevada,67.0
+Wake Forest,63.0,Syracuse,72.0
+Utah,60.0,Colorado,69.0
+Chattanooga,85.0,Samford,82.0
+LSU,67.0,Florida,79.0
+Okla. St.,71.0,Texas Tech,68.0
+Pittsburgh,76.0,Miami,78.0
+Sacred Heart,60.0,Merrimack,71.0
+S. Illinois,52.0,Drake,65.0
+Stony Brook,76.0,NC A&T,61.0
+Texas St.,71.0,Marshall,68.0
+Alabama A&M,68.0,Southern U.,65.0
+Alcorn St.,63.0,Ark.-Pine Bluff,58.0
+Alabama St.,49.0,Grambling,69.0
+Duke,62.0,N. Carolina,57.0
+Binghamton,67.0,UMBC,65.0
+Butler,66.0,Xavier,78.0
+Chicago St.,72.0,Fresno St.,108.0
+FAU,76.0,La. Tech,72.0
+Iona,80.0,Rider,78.0
+Jackson St.,68.0,Miss Valley St.,60.0
+North Dakota,80.0,Oral Roberts,96.0
+N.J. Tech,57.0,Vermont,84.0
+Quinnipiac,88.0,Marist,76.0
+Idaho,76.0,N. Arizona,87.0
+UConn,71.0,Villanova,59.0
+Yale,84.0,Brown,75.0
+California,66.0,Oregon St.,69.0
+Davidson,68.0,Rhode Island,54.0
+Notre Dame,64.0,Clemson,87.0
+SE Missouri St.,89.0,Tenn. Tech,82.0
+St. Fran.-Pa.,50.0,FDU,70.0
+Ga. Southern,49.0,Louisiana,67.0
+Miss. St.,72.0,Vanderbilt,77.0
+Northeastern,74.0,Delaware,77.0
+Wofford,67.0,UNCG,66.0
+Boise St.,73.0,Utah St.,86.0
+Creighton,84.0,DePaul,70.0
+Cal-Baker.,44.0,UC Irvine,52.0
+Hawaii,61.0,UCSB,81.0
+Neb.-Omaha,55.0,S. Dak. St.,63.0
+Arizona,73.0,UCLA,82.0
+BYU,73.0,LMU,63.0
+N. Colorado,84.0,Portland St.,80.0
+UC Riverside,73.0,Cal Poly,72.0
+Wyoming,50.0,San Diego St.,67.0
+Arizona St.,65.0,USC,68.0
+Charleston So.,66.0,UNC-Ash.,75.0
+E. Michigan,66.0,N. Illinois,85.0
+N. Iowa,66.0,Bradley,72.0
+Monmouth,100.0,Hampton,64.0
+Gardner-Webb,76.0,SC Upstate,77.0
+Indiana St.,94.0,Belmont,91.0
+The Citadel,41.0,Mercer,66.0
+Akron,84.0,Kent St.,89.0
+Campbell,81.0,Longwood,68.0
+Toledo,87.0,Ball St.,81.0
+C. Michigan,65.0,W. Michigan,81.0
+Dayton,61.0,Saint Louis,65.0
+East Carolina,78.0,Tulane,81.0
+Miami (Ohio),63.0,Buffalo,68.0
+Murray St.,62.0,Drake,74.0
+North Dakota,83.0,Denver,68.0
+Abilene Chr.,54.0,Sam Houston,72.0
+VMI,72.0,Chattanooga,92.0
+Bowling Green,58.0,Ohio,92.0
+SE Missouri St.,65.0,Morehead St.,58.0
+SF Austin,69.0,Utah Valley,113.0
+Winthrop,69.0,Radford,78.0
+Cal Baptist,71.0,So. Utah,81.0
+Grand Canyon,71.0,Utah Tech,61.0
+Portland,71.0,BYU,82.0
+Missouri St.,51.0,S. Illinois,54.0
+Neb.-Omaha,73.0,UMKC,61.0
+UT Arlington,56.0,Seattle,80.0
+UT Martin,63.0,Tenn. Tech,78.0
+New Mexico,84.0,Colo. St.,92.0
+Pacific,63.0,San Fran.,80.0
+App. St.,61.0,South Alabama,68.0
+Illinois St.,62.0,N. Iowa,75.0
+Arkansas St.,59.0,Troy,63.0
+Evansville,58.0,Indiana St.,97.0
+Boston U.,69.0,Army,71.0
+Texas St.,65.0,Old Dominion,36.0
+American,52.0,Navy,51.0
+E. Kentucky,73.0,Liberty,79.0
+FIU,76.0,La. Tech,77.0
+Lafayette,71.0,Lehigh,64.0
+Loyola-Md.,73.0,Colgate,92.0
+Lipscomb,71.0,Kennesaw St.,80.0
+Manhattan,67.0,Siena,66.0
+Marist,74.0,Iona,93.0
+Michigan,87.0,Illinois,91.0
+Oakland,74.0,N. Kentucky,81.0
+Rider,73.0,St. Peter's,60.0
+Rutgers,74.0,Minnesota,75.0
+UCF,55.0,Temple,57.0
+Valparaiso,50.0,Murray St.,78.0
+Wichita St.,66.0,Houston,83.0
+Quinnipiac,82.0,Fairfield,92.0
+SE Missouri St.,91.0,Tennessee St.,83.0
+NC Central,71.0,SC State,64.0
+Md.-E. Shore,64.0,Delaware St.,58.0
+Charlotte,73.0,UTSA,78.0
+Coppin St.,77.0,Morgan St.,65.0
+Detroit,66.0,Youngstown St.,71.0
+FAU,103.0,Rice,74.0
+Middle Tenn.,50.0,North Texas,64.0
+Robert Morris,70.0,Clev. St.,75.0
+Wright St.,70.0,Milwaukee,87.0
+Alabama A&M,48.0,Grambling,60.0
+Alcorn St.,70.0,Miss Valley St.,60.0
+UL-Monroe,57.0,Ga. Southern,66.0
+Alabama St.,52.0,Southern U.,66.0
+Arizona St.,61.0,UCLA,79.0
+Jackson St.,67.0,Ark.-Pine Bluff,63.0
+Memphis,81.0,SMU,62.0
+Norfolk St.,67.0,Howard,87.0
+Purdue,63.0,Wisconsin,61.0
+Stanford,83.0,Oregon St.,60.0
+UCSB,89.0,UC Davis,86.0
+San Diego,74.0,Portland,92.0
+W. Kentucky,73.0,UTEP,68.0
+UIC,57.0,Missouri St.,74.0
+Cal-Baker.,61.0,LBSU,77.0
+Hawaii,81.0,CSNorthridge,55.0
+UC Irvine,75.0,UC Riverside,65.0
+SIUE,75.0,UT Martin,81.0
+Arizona,87.0,USC,81.0
+California,51.0,Oregon,84.0
+Washington St.,93.0,Washington,84.0
+Pepperdine,71.0,Pacific,84.0
+Charleston So.,72.0,High Point,70.0
+Xavier,94.0,Providence,89.0
+Auburn,85.0,Alabama,90.0
+CCSU,69.0,St. Fran.-Pa.,83.0
+DePaul,59.0,UConn,88.0
+Fordham,58.0,George Mason,64.0
+George Wash.,75.0,Davidson,70.0
+LIU,76.0,Merrimack,91.0
+Maryland,62.0,Ohio St.,73.0
+Pittsburgh,81.0,Notre Dame,88.0
+Richmond,67.0,Saint Joseph's,83.0
+St. Fran.-NY,75.0,FDU,83.0
+Tulsa,56.0,South Florida,72.0
+Massachusetts,79.0,Duquesne,88.0
+Vanderbilt,68.0,Kentucky,66.0
+Wagner,55.0,Sacred Heart,67.0
+Lindenwood,65.0,SE Missouri St.,84.0
+Sam Houston,64.0,SF Austin,59.0
+Lamar,60.0,Nicholls St.,64.0
+Oklahoma,69.0,Kansas St.,85.0
+Presbyterian,63.0,Campbell,68.0
+SE Louisiana,80.0,Houston Chr.,64.0
+UT Arlington,59.0,Utah Valley,78.0
+Georgetown,59.0,Creighton,99.0
+New Orleans,73.0,McNeese St.,80.0
+Chicago St.,65.0,Gonzaga,104.0
+Grand Canyon,83.0,So. Utah,78.0
+Missouri,81.0,LSU,76.0
+Penn St.,68.0,Northwestern,65.0
+Rhode Island,79.0,Loyola Chi.,77.0
+Seattle,56.0,Utah Tech,93.0
+Texas,73.0,TCU,75.0
+Tulane,68.0,East Carolina,83.0
+Texas A&M-CC,93.0,Texas A&M-Commerce,88.0
+Incarnate Word,64.0,Northwestern St.,81.0
+So. Indiana,54.0,SIUE,68.0
+UT-Rio Grande Valley,70.0,Cal Baptist,88.0
+Utah St.,91.0,UNLV,66.0

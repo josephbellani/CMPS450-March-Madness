@@ -598,6 +598,10 @@ MMteams['Conference'] = MMteams['Conference'].str.replace('Conference USA', 'C-U
 MMteams['Conference'] = MMteams['Conference'].str.replace('NEC', 'Northeast')
 MMteams['Conference'] = MMteams['Conference'].str.replace('Mid American', 'MAC')
 MMteams['Conference'] = MMteams['Conference'].str.replace('MVC', 'Missouri Valley')
+MMteams['Berth type'] = MMteams['Berth type'].str.replace('Auto', 'Automatic')
+MMteams['Berth type'] = MMteams['Berth type'].str.replace('Automaticmatic', 'Automatic')
+MMteams['Berth type'] = MMteams['Berth type'].str.replace('At–large', 'At-Large')
+MMteams['Berth type'] = MMteams['Berth type'].str.replace('At-large', 'At-Large')
 
 # Resets PPG and OppPPG to floats to allow averaging
 MMteams['PPG'] = MMteams['PPG'].astype(float)
