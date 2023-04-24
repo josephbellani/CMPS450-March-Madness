@@ -1,0 +1,152 @@
+---
+title: "March Madness Simulation"
+subtitle: "A computer's attempt to make a bracket"
+author: "Joseph Bellani"
+bibliography: references.bib
+number-sections: true
+format:
+  html:
+    theme: default
+    rendering: embed-resources
+    code-fold: true
+    code-tools: true
+  pdf: default
+jupyter: python3
+---
+
+# Introduction
+
+Every year I watch the March Madness tournament with my dad, always filling out brackets to see how well we could predict the tournament. All across the country people fill out brackets doing the same, this year roughly 21 million people filled out bracket. To this date not a single person has filled out a perfect bracket, with most, if not all, brackets getting a game wrong before the end of the first round. There are over 2.1 billion possible bracket combinations, 10 times the number of brackets that were filled out this year. 
+
+As a result I created this project to take a look into what makes a team qualified to make the NCAA College Basketball Tournament, as well what teams a simulation model believes will do well in this year's tournament.
+
+# Data Collection
+
+For this project all of the data was collected using web scraping. There are two main datasets that were created as a result of web scraping. The first data set includes team statistics from the years of 2012-2022 (except for 2019-20 due to the shortened season as a result of the COVID-19 pandemic). The second data set contained game-level data from the 2022-23 season, from which each team's average points for, standard deviation of points for, and average points against were gained. The websites web scraped were Kenpom, for advanced statistics, Wikipedia, to read in which teams made each tournament, TeamRankings, for team statistics, and CBS for individual game scores.
+
+# Results
+
+## Which teams made March Madness?
+
+To look into the past teams who have made the tournament I opted to look at the previous 10 tournaments. Some of the statistics we will be looking at include Wins, Strength of Schedule, Adjusted Rankings amongst other statistics.
+
+@fig-seed below shows us which statistic, Wins or Strength of Schedule, is more important to earn higher seeds in March Madness. Obviously, having played the most difficult teams, while also winning a lot of games landed teams with the highest seeds. What is more interesting is the difference between teams with higher win counts and lower strength of schedules versus teams with lower wins and higher strength of schedules. It is apparent that strength of schedule is more of a factor than total wins, as some purple dots can be found in the bottom left of the scatter plot, but none are really found on the right of the plot at all.
+
+```{python}
+#| label: fig-seed
+#| fig-cap: "Scatterplot of Seed determined by Wins and Strength of Schedule"
+import pandas as pd
+import matplotlib.pyplot as plt
+fullstats = pd.read_csv("fullstats.csv")
+
+# Create scatter plot
+plt.scatter(fullstats["AdjEM Rank"], fullstats.Wins, c = fullstats.Seed)
+
+# Add axis labels and title
+plt.xlabel('Strength of Schedule Rank')
+plt.ylabel('Wins')
+plt.title('Seed by Wins and Strength of Schedule')
+
+# Create and format the colorbar
+cbar = plt.colorbar()
+cbar.ax.invert_yaxis()  # invert the colorbar scale
+
+# Display the plot
+plt.show()
+
+
+# While it may have been obvious already, this chart shows that teams must have a good combination between wins and strength
+# of schedule to earn a high seed, if you do not play other good teams it is unlikely you earn a top seed.
+```
+
+@fig-map shows the distribution of March Madness by states in which the school is located. Texas leads the pack, having a plethora of schools eligible for March Madness. More of a surprise to those who are not fans of college basketball, North Carolina ranks second amongst all states as it has perennial favorites such as Duke and North Carolina who make the tournament almost every year. The east half of the US dominates tournament bids outside a few states, namely Texas, California, and Kansas.
+
+```{python}
+#| label: fig-map
+#| fig-cap: "Map of March Madness Teams by State (2012-2022)"
+import pandas as pd
+import plotly.express as px
+fullstats = pd.read_csv("fullstats.csv")
+
+# Group by state and count the occurrences of each two-letter abbreviation
+state_counts = fullstats['State'].value_counts().reset_index(name='count').rename(columns={'index': 'state'})
+
+# Create a choropleth map
+fig = px.choropleth(state_counts, locations='state', locationmode='USA-states', color='count', scope='usa', color_continuous_scale='YlOrRd')
+
+# Set title and colorbar label
+fig.update_layout(title_text='March Madness Teams by State')
+fig.update_coloraxes(colorbar_title='# of Teams')
+
+# Show the plot
+fig.show()
+
+# The field seems to be made up of mainly teams from Texas, California, Virginia, New York, North Carolia and Ohio. The two
+# states that stand the most are Texas and North Carolina as Texas features a lot of Power 5 schools, while North Carolina 
+# is top heavy having perennial favorites such as North Carolina and Duke that make the field almost every year.
+```
+
+@fig-piechart shows the distribution of teams in March Madness by the conference in which they play in. The largest piece of the pie went to the 1-bid conferences, which are the conferences that sent one team each year, the minimum. As for the conferences that sent the most teams, the Big Ten, the ACC, the Big 12 and the Big East led all conferences in teams in March Madness from 2012-22. When looking at @fig-map these conferences make sense to be the top team senders as they are mainly located on the east coast, in the mid west and in Texas.
+
+```{python}
+#| label: fig-piechart
+#| fig-cap: "Pie Chart of March Madness teams by Conference"
+import pandas as pd
+MMteams = pd.read_csv("MMteams.csv")
+import matplotlib.pyplot as plt
+
+# Counts how many occurences of each conference are found in the dataset
+n = 15
+conference_counts = MMteams['Conference'].value_counts()
+top_conferences = conference_counts[:n].index.tolist()
+MMteams.loc[~MMteams['Conference'].isin(top_conferences), 'Conference'] = '1 Bid Conferences'
+conference_counts = MMteams['Conference'].value_counts()
+
+# Plots the resulting Pie Chart
+plt.figure(figsize=(8,8))
+plt.pie(conference_counts, labels=conference_counts.index, autopct='%1.1f%%')
+plt.title('Conference Distribution')
+plt.show()
+
+# The 1-bid Conferences were the conferences in which between 2012 and 2022 only had one team each year. An interesting note
+# is that the "Power 5" were not the top 5 conferences on the list as the SEC and the Pac-12 both fell underneath the Big 
+# East in this chart
+```
+
+## Which teams will do well this year?
+
+To answer this question I decided to use a Monte Carlo Simulation on the Tournament. What it is in theory is taking two teams and simulating any given amount of games between them, in the case of this project 10,000 times. I used each team's average points for, standard deviation of points for, and average points against to help predict both teams points in each of the 10,000 games. One team's score is calculated using their points for and their opponents points against.
+
+To answer the question of which teams the model predicts to do well I simulated each game of the March Madness tournament, the NIT, and the six conferences that have sent the most teams over the past 10 years (see @fig-piechart). What was found is that the conference tournaments were the most accurately predicted, followed by March Madness, then the NIT. The accuracies for each grouping are shown by @fig-accuracy
+
+```{python}
+#| label: fig-accuracy
+#| fig-cap: "Accuracies of Tournaments as predicted by simulation"
+values = [37/63, 15/31, 52/70]
+labels = ['MM', 'NIT', 'Conference Tournaments']
+
+fig, ax = plt.subplots()
+
+ax.bar(labels, values)
+ax.set_ylabel('Accuracy')
+ax.set_xlabel('Tournament')
+ax.set_title('Accuracy of Model by Tournament Projected')
+
+plt.show()
+```
+
+When looking at which tournaments were predicted the best the shortcomings of the model were more evident than ever. Since the conference tournaments were between teams playing similar schedules, the difference of strength of schedule was certainly altering the model. Teams like Montana State were predicted to beat top ranked teams such as Kansas State and Kentucky. The NIT had lower rated teams winning at extremely high rates. The issue is that just looking at box scores ignores how rigorous the team's schedule was. Teams from the ACC, the Big Ten, etc, played other teams within their conference, likely leading to close games. On the other hand, teams that fall in the 1-Bid conferences play worse teams during the season, boosting their points for and against. If there was a way to take strength of schedule or conference into account the accuracy of the model for March Madness and the NIT would likely increase.
+
+
+
+
+
+
+
+
+
+
+Here's an example of citing a source [see @gree00, pp. 33-35]. Be sure the source information is entered in "BibTeX" form in the `references.bib` file.
+
+
+The bibliography will automatically get generated. Any sources you cite in the document will be included. Other entries in the `.bib` file will not be included.
