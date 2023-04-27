@@ -7,7 +7,7 @@ number-sections: true
 format:
   html:
     theme: default
-    rendering: embed-resources
+    rendering: default
     code-fold: true
     code-tools: true
   pdf: default
@@ -24,6 +24,24 @@ As a result I created this project to take a look into what makes a team qualifi
 
 For this project all of the data was collected using web scraping. There are two main datasets that were created as a result of web scraping. The first data set includes team statistics from the years of 2012-2022 (except for 2019-20 due to the shortened season as a result of the COVID-19 pandemic). The second data set contained game-level data from the 2022-23 season, from which each team's average points for, standard deviation of points for, and average points against were gained. The websites web scraped were Kenpom, for advanced statistics, Wikipedia, to read in which teams made each tournament, TeamRankings, for team statistics, and CBS for individual game scores.
 
+The data set created for the historical was named fullstats. Resulting rows can be seen below. The first few rows were filled by Gonzaga, specifically their teams in the past five March Madness Tournaments. The dimensions of this data set were 680 rows by 30 columns, providing a wide arrange of statistics to look at. 
+
+```{python}
+import pandas as pd
+fullstats = pd.read_csv("fullstats.csv")
+
+fullstats.head()
+```
+
+
+The second of the two created data sets was AllStats. This data set was much smaller than fullstats, but originally had roughly 5,500 rows before the data was prepared. As you can see below this data set shows 3 statistics for each team in 2023. Every Division 1 college team has a row, leading the dimensions to be 367 rows by 3 columns.
+
+```{python}
+import pandas as pd
+AllStats = pd.read_csv("AllStats.csv")
+
+AllStats.head()
+```
 # Results
 
 ## Which teams made March Madness?
@@ -113,9 +131,122 @@ plt.show()
 # East in this chart
 ```
 
+Another look into the difference between conferences would be to look at each conference's average seed. @fig-confseeds clearly shows groups of teams, showing which conferences usually produce the highest seeds. The top group consists of mostly the conferences that send the most teams as well, the only exceptions being the West Coast Conference and the American Athletic Conference, who both boast one team who is a perennial favorite the past 10 years, Houston and Gonzaga respectively. Up next are the Mid-Majors, the Atlantic 10, the Mountain West and the Missouri Valley all fall into their own little of around 8th-9th seed on average. These conferences usually send 2, maybe 3 teams that all typically fall between the 7th and 11th seeds. The last group is the 1-big conferences, very rarely if ever do these conferences send multiple teams into the tournament. These conferences only send the winner of their own conference tournament, which usually means that their teams will populate the 12th-16th seeds in the tournament, further backed up by @fig-confseeds.
+
+```{python}
+#| label: fig-confseeds
+#| fig-cap: "Average Seed of Conferences"
+import pandas as pd
+MMteams = pd.read_csv("MMteams.csv")
+import matplotlib.pyplot as plt
+# Group by year and calculate the mean of PPG and OppPPG
+MMteams['Seed'] = MMteams['Seed'].astype(str)
+
+# Removes all *'s and #'s from the Seed Column, and makes Seed a Float
+MMteams['Seed'] = MMteams['Seed'].str.replace('*', '')
+MMteams['Seed'] = MMteams['Seed'].str.replace('#', '')
+MMteams['Seed'] = MMteams['Seed'].astype(float)
+
+
+# Plot the dual bar chart
+avg_seed = MMteams.groupby('Conference')['Seed'].mean()
+avg_seed_sorted = avg_seed.sort_values(ascending=False)
+
+# Create a bar chart of the average seed by conference
+fig, ax = plt.subplots(figsize=(10, 10))
+
+# plot the bar chart
+ax.barh(avg_seed_sorted.index, avg_seed_sorted.values)
+
+# customize the chart
+ax.set_title('Average Seed by Conference')
+ax.set_xlabel('Conference')
+ax.set_ylabel('Average Seed')
+ax.tick_params(axis='x', rotation=10)
+plt.show()
+
+# There is an obvious jump between the Atlantic 10 and Conference USA on this chart. The reason is likely because the 
+# conferences below the A10 usually get one sometimes two teams into the tournament, and since their teams are not as good
+# as the other conferences their teams struggle to gain a high enough Strength of Schedule to both make the tournament,
+# as well as earning top seeds
+```
+
 ## Which teams will do well this year?
 
 To answer this question I decided to use a Monte Carlo Simulation on the Tournament. What it is in theory is taking two teams and simulating any given amount of games between them, in the case of this project 10,000 times. I used each team's average points for, standard deviation of points for, and average points against to help predict both teams points in each of the 10,000 games. One team's score is calculated using their points for and their opponents points against.
+
+For example, if I wanted to simulate the National Championship game from this year (UConn vs San Diego State) I would input both of their names into the code. 
+
+Displayed in @fig-sim is the resulting simulation between UConn and San Diego State. Each time this page is loaded the simulation will run, generating 10,000 new scores for each team.
+
+```{python}
+#| label: fig-sim
+#| fig-cap: "Simulated Wins for UConn and San Diego State"
+
+# This is where the teams are chosen for the simulation
+import pandas as pd
+import math
+from scipy.stats import norm
+from numpy.random import uniform
+import matplotlib.pyplot as plt
+import numpy as np
+AllStats = pd.read_csv("AllStats.csv")
+AllStats
+team1 = "UConn"
+team2 = "San Diego St"
+
+# Assigns variables to team 1
+Team1PF = AllStats.loc[AllStats['Team'] == team1, 'Points For'].values[0]
+Team1PA = AllStats.loc[AllStats['Team'] == team1, 'Points Against'].values[0]
+Team1SDPF = AllStats.loc[AllStats['Team'] == team1, 'Standard Deviation'].values[0]
+
+# Assigns variables to team 2
+Team2PF = AllStats.loc[AllStats['Team'] == team2, 'Points For'].values[0]
+Team2PA = AllStats.loc[AllStats['Team'] == team2, 'Points Against'].values[0]
+Team2SDPF = AllStats.loc[AllStats['Team'] == team2, 'Standard Deviation'].values[0]
+
+# Creates Adjusted points for both teams based on values from each team
+Team1ADJ = math.sqrt(Team1PF * Team2PA)
+Team2ADJ = math.sqrt(Team2PF * Team1PA)
+
+# Generates one score for team 1
+norm.ppf(
+  uniform(0, 1),
+  loc=Team1ADJ,
+  scale=Team1SDPF
+)
+
+# Generates one score for team 2
+norm.ppf(
+  uniform(0, 1),
+  loc=Team2ADJ,
+  scale=Team2SDPF
+)
+
+# Names variables used for simulation
+N = 10000
+outcome = np.empty(N, dtype='object')
+
+# Runs the simulation 10,000 times
+for i in range(N):
+    d = (np.random.normal(loc=Team1ADJ, scale=Team1SDPF) -
+         np.random.normal(loc=Team2ADJ, scale=Team2SDPF))
+    d = team1 if d > 0 else team2
+    outcome[i] = d
+
+# Makes variables to help with visualization
+outcome_series = pd.Series(outcome)
+table = outcome_series.value_counts()
+rel_freq = table / table.sum()
+
+# Plots the relative frequencies as a bar chart
+plt.bar(x=rel_freq.index, height=rel_freq.values)
+
+# Plots Bar Graph and exact values for the Monte Carlo Simulation
+print(table)
+plt.show()
+
+```
 
 To answer the question of which teams the model predicts to do well I simulated each game of the March Madness tournament, the NIT, and the six conferences that have sent the most teams over the past 10 years (see @fig-piechart). What was found is that the conference tournaments were the most accurately predicted, followed by March Madness, then the NIT. The accuracies for each grouping are shown by @fig-accuracy
 
@@ -137,16 +268,302 @@ plt.show()
 
 When looking at which tournaments were predicted the best the shortcomings of the model were more evident than ever. Since the conference tournaments were between teams playing similar schedules, the difference of strength of schedule was certainly altering the model. Teams like Montana State were predicted to beat top ranked teams such as Kansas State and Kentucky. The NIT had lower rated teams winning at extremely high rates. The issue is that just looking at box scores ignores how rigorous the team's schedule was. Teams from the ACC, the Big Ten, etc, played other teams within their conference, likely leading to close games. On the other hand, teams that fall in the 1-Bid conferences play worse teams during the season, boosting their points for and against. If there was a way to take strength of schedule or conference into account the accuracy of the model for March Madness and the NIT would likely increase.
 
+# Bracket Generater
+
+One of the last features for this project was the ability to generate an entire bracket with one click. Similarly to the UConn vs San Diego State Simulation, each time this page is refreshed a new bracket will be generated. Below is the resulting bracket when it simulates just 3 games between teams, meaning the results of the simulations will change drastically every time. One of the features of the code is that the amount of games played can be specified before simulation. So if I wanted to make a bracket that simulated each game 10,000 times I could by simply changing the number in the function call.
+
+```{python}
+def Simulate(team1, team2, N):
+    # Assigns variables to team 1
+    Team1PF = AllStats.loc[AllStats['Team'] == team1, 'Points For'].values[0]
+    Team1PA = AllStats.loc[AllStats['Team'] == team1, 'Points Against'].values[0]
+    Team1SDPF = AllStats.loc[AllStats['Team'] == team1, 'Standard Deviation'].values[0]
+
+    # Assigns variables to team 2
+    Team2PF = AllStats.loc[AllStats['Team'] == team2, 'Points For'].values[0]
+    Team2PA = AllStats.loc[AllStats['Team'] == team2, 'Points Against'].values[0]
+    Team2SDPF = AllStats.loc[AllStats['Team'] == team2, 'Standard Deviation'].values[0]
+
+    Team1ADJ = math.sqrt(Team1PF * Team2PA)
+    Team2ADJ = math.sqrt(Team2PF * Team1PA)
+
+    # Names variables used for simulation
+    outcome = np.empty(N, dtype='object')
+
+    # Runs the simulation 10,000 times
+    for i in range(N):
+        d = (np.random.normal(loc=Team1ADJ, scale=Team1SDPF) -
+             np.random.normal(loc=Team2ADJ, scale=Team2SDPF))
+        d = team1 if d > 0 else team2
+        outcome[i] = d
+    
+    # Makes variables to help with visualization
+    outcome_series = pd.Series(outcome)
+    table = outcome_series.value_counts()
+    rel_freq = table / table.sum()
+    return(table)
+    
+
+teams = ["Alabama", "Texas A&M-CC", "Maryland", "West Virginia", "San Diego St", "Charleston", "Virginia", "Furman", "Creighton", "NC State", "Baylor", "UCSB", "Missouri", "Utah St.", "Arizona", "Princeton", "Purdue", "FDU", "Memphis", "FAU", "Duke", "Oral Roberts", "Tennessee", "Louisiana", "Kentucky", "Providence", "Kansas St.", "Montana St.", "Michigan St.", "USC", "Marquette", "Vermont", "Houston", "N. Kentucky", "Iowa", "Auburn", "Miami", "Drake", "Indiana", "Kent St.", "Iowa St.", "Pittsburgh", "Xavier", "Kennesaw St.", "Texas A&M", "Penn St.", "Texas", "Colgate", "Kansas", "Howard", "Arkansas", "Illinois", "Saint Mary's", "VCU", "UConn", "Iona", "TCU", "Arizona St.", "Gonzaga", "Grand Canyon", "Northwestern", "Boise St.", "UCLA", "UNC-Ash."]
+i = 0
+x=' '
+round2teams=[]
+while i < 64:
+    table = Simulate(teams[i], teams[i+1], 3)
+    rows = len(table)
+    table = str(table)
+    table = table.replace("dtype: int64", "")
+    table = table.replace("  ", "")
+    table = table.strip()
+    table = ''.join([i for i in table if not i.isdigit()])
+    if rows > 1:
+        table = table[:table.index("\n")]
+        table = table.strip()
+    y = 14 - len(table)
+    z = y * x
+    table = table + z
+    round2teams.append(table)
+    
+    i = i + 2
+
+k = 0
+round3teams = []
+temp = []
+while k < 32:
+    temp.append(round2teams[k].strip())
+    temp.append(round2teams[k + 1].strip())
+    table = Simulate(temp[k], temp[k+1], 3)
+    rows = len(table)
+    table = str(table)
+    table = table.replace("dtype: int64", "")
+    table = table.replace("  ", "")
+    table = table.strip()
+    table = ''.join([k for k in table if not k.isdigit()])
+    if rows > 1:
+        table = table[:table.index("\n")]
+        table = table.strip()
+    y = 14 - len(table)
+    z = y * x
+    table = table + z
+    round3teams.append(table)
+    k = k + 2
+    
+l = 0
+round4teams = []
+temp2 = []
+while l < 16:
+    temp2.append(round3teams[l].strip())
+    temp2.append(round3teams[l + 1].strip())
+    table = Simulate(temp2[l], temp2[l+1], 3)
+    rows = len(table)
+    table = str(table)
+    table = table.replace("dtype: int64", "")
+    table = table.replace("  ", "")
+    table = table.strip()
+    table = ''.join([l for l in table if not l.isdigit()])
+    if rows > 1:
+        table = table[:table.index("\n")]
+        table = table.strip()
+    y = 14 - len(table)
+    z = y * x
+    table = table + z
+    round4teams.append(table)
+    l = l + 2
+
+m = 0
+round5teams = []
+temp3 = []
+while m < 8:
+    temp3.append(round4teams[m].strip())
+    temp3.append(round4teams[m + 1].strip())
+    table = Simulate(temp3[m], temp3[m+1], 3)
+    rows = len(table)
+    table = str(table)
+    table = table.replace("dtype: int64", "")
+    table = table.replace("  ", "")
+    table = table.strip()
+    table = ''.join([m for m in table if not m.isdigit()])
+    if rows > 1:
+        table = table[:table.index("\n")]
+        table = table.strip()
+    y = 14 - len(table)
+    z = y * x
+    table = table + z
+    round5teams.append(table)
+    m = m + 2
+
+n = 0
+round6teams = []
+temp4 = []
+while n < 4:
+    temp4.append(round5teams[n].strip())
+    temp4.append(round5teams[n + 1].strip())
+    table = Simulate(temp4[n], temp4[n+1], 3)
+    rows = len(table)
+    table = str(table)
+    table = table.replace("dtype: int64", "")
+    table = table.replace("  ", "")
+    table = table.strip()
+    table = ''.join([n for n in table if not n.isdigit()])
+    if rows > 1:
+        table = table[:table.index("\n")]
+        table = table.strip()
+    y = 14 - len(table)
+    z = y * x
+    table = table + z
+    round6teams.append(table)
+    n = n + 2
+champion = Simulate(round6teams[0].strip(), round6teams[1].strip(), 3)
+rows = len(champion)
+champion = str(champion)
+champion = champion.replace("dtype: int64", "")
+champion = champion.replace("  ", "")
+champion = champion.strip()
+champion = ''.join([n for n in champion if not n.isdigit()])
+if rows > 1:
+    champion = champion[:champion.index("\n")]
+    champion = champion.strip()
+j = 0
+while j < 64: 
+    y = 14 - len(teams[j])
+    z = y * x
+    teams[j] = teams[j] + z
+    j = j + 1
+print(teams[0])
+print("——————————————|" + round2teams[0])
+print(teams[1] + "|——————————————|")
+print("——————————————|              |" + round3teams[0])
+print(teams[2] + "               |——————————————|")
+print("——————————————|" + round2teams[1] +"|              |")
+print(teams[3] + "|——————————————|              |")
+print("——————————————|                             |" + round4teams[0])
+print(teams[4] + "                              |——————————————|")
+print("——————————————|" + round2teams[2] + "               |              |")
+print(teams[5] + "|——————————————|              |              |")
+print("——————————————|              |" + round3teams[1] + "|              |")
+print(teams[6] + "               |——————————————|              |")
+print("——————————————|" + round2teams[3] +"|                             |")
+print(teams[7] + "|——————————————|                             |")
+print("——————————————|                                            |" + round5teams[0])
+print(teams[8] + "                                             |——————————————|")
+print("——————————————|" + round2teams[4] + "                              |              |")
+print(teams[9] + "|——————————————|                             |              |")
+print("——————————————|              |" + round3teams[2] + "               |              |")
+print(teams[10] + "               |——————————————|              |              |")
+print("——————————————|" + round2teams[5] +"|              |              |              |")
+print(teams[11] + "|——————————————|              |              |              |")
+print("——————————————|                             |" + round4teams[1] + "|              |")
+print(teams[12] + "                              |——————————————|              |")
+print("——————————————|" + round2teams[6] + "               |                             |")
+print(teams[13] + "|——————————————|              |                             |")
+print("——————————————|              |" + round3teams[3] + "|                             |")
+print(teams[14] + "               |——————————————|                             |")
+print("——————————————|" + round2teams[7] +"|                                            |")
+print(teams[15] + "|——————————————|                                            |")
+print("——————————————|                                                           |" + round6teams[0])
+print(teams[16] + "                                                            |——————————————|")
+print("——————————————|" + round2teams[8] + "                                             |              |")
+print(teams[17] + "|——————————————|                                            |              |")
+print("——————————————|              |" + round3teams[4] + "                              |              |")
+print(teams[18] + "               |——————————————|                             |              |")
+print("——————————————|" + round2teams[9] +"|              |                             |              |")
+print(teams[19] + "|——————————————|              |                             |              |")
+print("——————————————|                             |" + round4teams[2] + "               |              |")
+print(teams[20] + "                              |——————————————|              |              |")
+print("——————————————|" + round2teams[10] + "               |              |              |              |")
+print(teams[21] + "|——————————————|              |              |              |              |")
+print("——————————————|              |" + round3teams[5] + "|              |              |              |")
+print(teams[22] + "               |——————————————|              |              |              |")
+print("——————————————|" + round2teams[11] +"|                             |              |              |")
+print(teams[23] + "|——————————————|                             |              |              |")
+print("——————————————|                                            |" + round5teams[1] + "|              |")
+print(teams[24] + "                                             |——————————————|              |")
+print("——————————————|" + round2teams[12] + "                              |                             |")
+print(teams[25] + "|——————————————|                             |                             |")
+print("——————————————|              |" + round3teams[6] + "               |                             |")
+print(teams[26] + "               |——————————————|              |                             |")
+print("——————————————|" + round2teams[13] +"|              |              |                             |")
+print(teams[27] + "|——————————————|              |              |                             |")
+print("——————————————|                             |" + round4teams[3] + "|                             |")
+print(teams[28] + "                              |——————————————|                             |")
+print("——————————————|" + round2teams[14] + "               |                                            |")
+print(teams[29] + "|——————————————|              |                                            |")
+print("——————————————|              |" + round3teams[7] + "|                                            |")
+print(teams[30] + "               |——————————————|                                            |")
+print("——————————————|" + round2teams[15] +"|                                                           |")
+print(teams[31] + "|——————————————|                                                           |")
+print("——————————————|                                                                          |"+ champion)
+print(teams[32] + "                                                                           |——————————————")
+print("——————————————|" + round2teams[16] + "                                                            |")
+print(teams[33] + "|——————————————|                                                           |")
+print("——————————————|              |" + round3teams[8] + "                                             |")
+print(teams[34] + "               |——————————————|                                            |")
+print("——————————————|" + round2teams[17] +"|              |                                            |")
+print(teams[35] + "|——————————————|              |                                            |")
+print("——————————————|                             |" + round4teams[4] + "                              |")
+print(teams[36] + "                              |——————————————|                             |")
+print("——————————————|" + round2teams[18] + "               |              |                             |")
+print(teams[37] + "|——————————————|              |              |                             |")
+print("——————————————|              |" + round3teams[9] + "|              |                             |")
+print(teams[38] + "               |——————————————|              |                             |")
+print("——————————————|" + round2teams[19] +"|                             |                             |")
+print(teams[39] + "|——————————————|                             |                             |")
+print("——————————————|                                            |" + round5teams[2] + "               |")
+print(teams[40] + "                                             |——————————————|              |")
+print("——————————————|" + round2teams[20] + "                              |              |              |")
+print(teams[41] + "|——————————————|                             |              |              |")
+print("——————————————|              |" + round3teams[10] + "               |              |              |")
+print(teams[42] + "               |——————————————|              |              |              |")
+print("——————————————|" + round2teams[21] +"|              |              |              |              |")
+print(teams[43] + "|——————————————|              |              |              |              |")
+print("——————————————|                             |" + round4teams[5] + "|              |              |")
+print(teams[44] + "                              |——————————————|              |              |")
+print("——————————————|" + round2teams[22] + "               |                             |              |")
+print(teams[45] + "|——————————————|              |                             |              |")
+print("——————————————|              |" + round3teams[11] + "|                             |              |")
+print(teams[46] + "               |——————————————|                             |              |")
+print("——————————————|" + round2teams[23] +"|                                            |              |")
+print(teams[47] + "|——————————————|                                            |              |")
+print("——————————————|                                                           |" + round6teams[1]+ "|")
+print(teams[48] + "                                                            |——————————————|")
+print("——————————————|" + round2teams[24] + "                                             |")
+print(teams[49] + "|——————————————|                                            |")
+print("——————————————|              |" + round3teams[12] + "                              |")
+print(teams[50] + "               |——————————————|                             |")
+print("——————————————|" + round2teams[25] +"|              |                             |")
+print(teams[51] + "|——————————————|              |                             |")
+print("——————————————|                             |" + round4teams[6] + "               |")
+print(teams[52] + "                              |——————————————|              |")
+print("——————————————|" + round2teams[26] + "               |              |              |")
+print(teams[53] + "|——————————————|              |              |              |")
+print("——————————————|              |" + round3teams[13] + "|              |              |")
+print(teams[54] + "               |——————————————|              |              |")
+print("——————————————|" + round2teams[27] +"|                             |              |")
+print(teams[55] + "|——————————————|                             |              |")
+print("——————————————|                                            |" + round5teams[3] + "|")
+print(teams[56] + "                                             |——————————————|")
+print("——————————————|" + round2teams[28] + "                              |")
+print(teams[57] + "|——————————————|                             |")
+print("——————————————|              |" + round3teams[14] + "               |")
+print(teams[58] + "               |——————————————|              |")
+print("——————————————|" + round2teams[29] +"|              |              |")
+print(teams[59] + "|——————————————|              |              |")
+print("——————————————|                             |" + round4teams[7] + "|")
+print(teams[60] + "                              |——————————————|")
+print("——————————————|" + round2teams[30] + "               |")
+print(teams[61] + "|——————————————|              |")
+print("——————————————|              |" + round3teams[15] + "|")
+print(teams[62] + "               |——————————————|")
+print("——————————————|" + round2teams[31] +"|")
+print(teams[63] + "|——————————————|")
+print("——————————————|")
+```
+
+This feature, along with the single game simulation, is only currently for the 2023 season. All that would be necessary for this code to work with any other season is the list of the teams competing in the tournament. Along with that, the AllStats equivalent for that year would be needed, which is also easily attainable due to the earlier webscraping work that is replicable for any season on the CBS website.
+
+# Future Work
+
+There are two main things that I would like to add to this project. Firstly, as mentioned previously the ability for the model to judge strength of schedule is currently not up to par, adding something to account for the different schedules played in college basketball would go a long way in improving this model. Second would be to add to a score to the bracket generator. This would be accomplished by awarding points if the simulator chose the correct team to advance each round. Generating the bracket would then not only produce a new bracket, but also how well the bracket did when compared to what actually happened. On top of the fun part of that addition, it would also be very practical. When adjusting the model I would be able to also run tests to see if the average score of the model went up or down as a result of the change, intertwining both ends of the future work of this project.
 
 
-
-
-
-
-
-
-
-Here's an example of citing a source [see @gree00, pp. 33-35]. Be sure the source information is entered in "BibTeX" form in the `references.bib` file.
-
-
-The bibliography will automatically get generated. Any sources you cite in the document will be included. Other entries in the `.bib` file will not be included.
+The resources used to complete this project include: @tidyX, @kenpom, @wikipedia, @teamrankings and @CBS.
