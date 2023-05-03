@@ -18,16 +18,19 @@ toc-depth: 2
 
 ![](mm.png)
 
-Every year I watch the March Madness tournament with my dad, always filling out brackets to see how well we could predict the tournament. All across the country, people fill out brackets doing the same. This year roughly 21 million people filled out a bracket. To this date not a single person has filled out a perfect bracket, with most, if not all, brackets predicting a game wrong before the end of the first round. There are over 2.1 billion possible bracket combinations, 10 times the number of brackets that were filled out this year. 
+Every year I watch the March Madness tournament with my dad, always filling out brackets to see how well we could predict the tournament. All across the country, people fill out brackets doing the same. This year roughly 20 million people filled out a bracket. To this date not a single person has filled out a perfect bracket, with most, if not all, brackets predicting a game wrong before the end of the first round. There are over 2.1 billion possible bracket combinations, 10 times the number of brackets that were filled out this year. Below is a video from the official March Madness YouTube Channel outlining how every bracket busted in 2023.
+
+{{< video https://www.youtube.com/watch?v=1yU3FM90cts&t=8s >}}
 
 As a result, I created this project to take a look into what makes a team qualified to make the NCAA College Basketball Tournament, as well as what teams a simulation model believes will do well in this year's tournament.
 
 # Data Collection
 
-For this project, all of the data was collected using web scraping. There are two main datasets that were created as a result of web scraping. The first data set includes team statistics from the years 2012-2022 (except for 2019-20 due to the shortened season as a result of the COVID-19 pandemic). The second data set contained game-level data from the 2022-23 season, containing each team’s average points scored, standard deviation of points scored, and average points against. The websites scraped were Kenpom for advanced statistics; Wikipedia for the teams that made each tournament; TeamRankings for team statistics; and CBS for individual game scores.
+For this project, all of the data was collected using web scraping. There are two main datasets were created. The first data set includes team statistics from the years 2012-2022 (except for 2019-20 due to the shortened season as a result of the COVID-19 pandemic). The second data set contained game-level data from the 2022-23 season, containing each team’s average points scored, standard deviation of points scored, and average points against. The websites scraped were @tidyX, @kenpom, @wikipedia, @teamrankings, and @CBS.
+.
 
 
-The data set created for the historical was named fullstats. Using the sample method from pandas, five random rows are shown below. The dataset is populated with every team that has made the March Madness Tournament in the past 10 years. The dimensions of this data set were 680 rows by 30 columns, providing a wide arrange of statistics to look at.  
+The first of the two data sets focuses on the historical side of the tournament. Using the sample method from pandas, five random rows are shown below. The dataset is populated with every team that has made the March Madness Tournament in the past 10 years. The dimensions of this data set were 680 rows by 30 columns, providing a wide arrange of statistics to look at.  
 
 ```{python}
 import pandas as pd
@@ -37,7 +40,7 @@ fullstats.sample(n=5)
 ```
 
 
-The second of the two created data sets was AllStats. This data set was much smaller than fullstats, but originally had roughly 5,500 rows before the data was prepared. As you can see below this data set shows 3 statistics for each team in 2023. Every Division 1 college team has a row, with the dimensions being 367 rows by 3 columns.
+The second of the two created data sets focused on this year's tournament. This data set was much smaller than fullstats, but originally had roughly 5,500 rows before the data was prepared. As you can see below this data set shows 3 statistics for each team in 2023. Every Division 1 college team has a row, with the dimensions being 367 rows by 3 columns.
 
 ```{python}
 import pandas as pd
@@ -49,9 +52,9 @@ AllStats.head()
 
 ## Which teams made March Madness?
 
-To look into the past teams who have made the tournament I opted to look at the previous 10 tournaments. Some of the statistics we will be looking at include Wins, Strength of Schedule, and Adjusted Rankings amongst other statistics.
+To look into the past teams who have made the tournament I opted to look at the previous 10 tournaments. Some of the statistics we will be looking at include Wins, Strength of Schedule, and Adjusted Rankings amongst others.
 
-@fig-seed below shows us which statistic, Wins or Strength of Schedule, is more important to earn higher seeds in March Madness. Obviously, having played the most difficult teams, while also winning a lot of games landed teams with the highest seeds. What is more interesting is the difference between teams with higher win counts and lower strength of schedules versus the opposite. It is apparent that strength of schedule is more of a factor than total wins, as some purple dots can be found in the bottom left of the scatter plot, but none are really found on the right of the plot at all.
+@fig-seed below shows us which statistic, Wins or Strength of Schedule, is more important to earn higher seeds in March Madness. Obviously, teams who played the most difficult teams and won those games earned the best seeds. What is more interesting is the difference between teams with higher win counts and lower strength of schedules versus the opposite. It is apparent that strength of schedule is more impactful than total wins, as some purple dots can be found in the bottom left of the scatter plot, but none are really found on the right of the plot at all.
 
 ```{python}
 #| label: fig-seed
@@ -80,7 +83,7 @@ plt.show()
 # of schedule to earn a high seed, if you do not play other good teams it is unlikely you earn a top seed.
 ```
 
-@fig-map shows the distribution of March Madness by the states in which the school is located. Texas leads the pack, having a plethora of schools eligible for March Madness. More of a surprise to those who are not fans of college basketball, North Carolina ranks second amongst all states as it has perennial favorites such as Duke and North Carolina who make the tournament almost every year. Sorry to anyone who lives in Maine, New Hampshire, or Alaska as not a single team from those states has made one of the past 10 March Madness Tournaments.
+@fig-map shows the distribution of March Madness by the states in which the school is located. Texas leads the pack, having a plethora of schools eligible for March Madness. More of a surprise to those who are not fans of college basketball, North Carolina ranks second amongst all states as it has perennial favorites, such as Duke, who make the tournament almost every year. Sorry to anyone who lives in Maine, New Hampshire, or Alaska as not a single team from those states has made one of the past ten March Madness Tournaments.
 
 ```{python}
 #| label: fig-map
@@ -134,7 +137,7 @@ plt.show()
 # East in this chart
 ```
 
-Another look into the difference between conferences would be to look at each conference's average seed. @fig-confseeds clearly shows groups of teams, showing which conferences usually produce the highest seeds. The top group consists of mostly the conferences that send the most teams as well, the only exceptions being the West Coast Conference and the American Athletic Conference, which both boast one team who is a perennial favorite the past 10 years, Houston and Gonzaga respectively. Up next are the Mid-Majors, the Atlantic 10, the Mountain West, and the Missouri Valley all fall into their own little of around 8th-9th seed on average. These conferences usually send 2, or maybe 3 teams that all typically fall between the 7th and 11th seeds. The last group is the 1-big conferences, very rarely if ever do these conferences send multiple teams into the tournament. These conferences only send the winner of their own conference tournament, which usually means that their teams will populate the 12th-16th seeds in the tournament, further backed up by @fig-confseeds.
+Another look into the difference between conferences would be to look at each conference's average seed. @fig-confseeds shows us three clear groups of teams. The best conferences make up the highest seeded group. Some outliers do exist however as the West Coast Conference and the American Athletic Conference are heavily weighted by one team, Gonzaga and Houston respectively. The teams at the very bottom of this graph are also the teams that made up the 1-Bid Conferences in @fig-piechart.
 
 ```{python}
 #| label: fig-confseeds
@@ -181,12 +184,11 @@ plt.show()
 
 ## Which teams will do well this year?
 
-To answer this question I decided to use a Monte Carlo Simulation on the Tournament. What it is in theory is taking two teams and simulating any given amount of games between them, in the case of this project 10,000 times. I used each team's average points scored, the standard deviation of points scored, and average points against to help predict both teams' points in each of the 10,000 games. One team's score is calculated using their points scored and their opponents' points against.
+To answer this question I decided to use a Monte Carlo Simulation on the Tournament. What it is in theory is taking two teams and simulating any given amount of games between them. For this project each matchup in March Marched will be simulated 10,000 times. I used each team's average points scored, the standard deviation of points scored, and average points against to help predict both teams' points in each of the 10,000 games. One team's score is calculated using their points scored and their opponents' points against.
 
 For example, if I wanted to simulate the National Championship game from this year (UConn vs San Diego State) I would input both of their names into the code. 
 
-Displayed in @fig-sim is the resulting simulation between UConn and San Diego State. Each time this page is loaded the simulation will run, generating 10,000 new scores for each team.
-
+Displayed in @fig-sim is the resulting simulation between UConn and San Diego State. Similarly to public opinion, UConn was picked by the simulation model to win the National Championship. While the model was more modest than the public (UConn was 7.5 point favorites), the difference in wins was significant enough to conclude that the model would choose UConn in every simulation.
 ```{python}
 #| label: fig-sim
 #| fig-cap: "Simulated Wins for UConn and San Diego State"
@@ -274,14 +276,15 @@ ax.set_title('Accuracy of Model by Tournament Projected')
 plt.show()
 ```
 
-When looking at which tournaments were predicted the best the shortcomings of the model were more evident than ever. Since the conference tournaments were between teams playing similar schedules, the difference of strength of schedule was certainly altering the model. Teams like Montana State were predicted to beat top-ranked teams such as Kansas State and Kentucky. The NIT had lower-rated teams winning at extremely high rates. The issue is that just looking at box scores ignores how rigorous the team's schedule was. Teams from the ACC, the Big Ten, etc, played other teams within their conference, likely leading to close games. On the other hand, teams that fall in the 1-Bid conferences play worse teams during the season, boosting their points for and against. If there was a way to take strength of schedule or conference into account the accuracy of the model for March Madness and the NIT would likely increase.
+When looking at which tournaments were predicted the best the shortcomings of the model were more evident than ever. Since the conference tournaments were between teams playing similar schedules, the difference of strength of schedule was certainly affecting the model. Big underdogs like Montana State were predicted to beat top-ranked teams such as Kansas State and Kentucky, while the NIT had lower-rated teams winning at extremely high rates. The issue is that just looking at box scores ignores how rigorous the team's schedule was. If there was a way to take strength of schedule or conference into account the accuracy of the model for March Madness and the NIT would likely increase.
 
 # Bracket Generator
 
-One of the last features of this project was the ability to generate an entire bracket with one click. Similarly to the UConn vs San Diego State Simulation, each time this page is refreshed a new bracket will be generated. Below is the resulting bracket when it simulates just 3 games between teams, meaning the results of the simulations will change drastically every time. One of the features of the code is that the number of games played can be specified before the simulation. So if I wanted to make a bracket that simulated each game 10,000 times I could by simply changing the number in the function call.
+One of the last features of this project was the ability to generate an entire bracket with one click.  Below is the resulting bracket when it simulates the entire tournament. Each game in this bracket was simulated 10,000 times, and yet each time it runs a slightly different bracket will be generated. One of the features of the code is that the number of games played can be specified before the simulation. So if I wanted to make a bracket that simulated each game once I could by simply changing the number in the function call.
+
+Even though each game was simulated 10,000 times that will not stop the bracket below from being different than the one it generated prior to the start of March Madness. Although the amount of simulations is meant to reduce variability, it does not remove it completely. Games that are predict each team with close to half the wins could fall either way, leading to an entirely new bracket.
 
 ```{python}
-#| echo: false
 def Simulate(team1, team2, N):
     # Assigns variables to team 1
     Team1PF = AllStats.loc[AllStats['Team'] == team1, 'Points For'].values[0]
@@ -318,7 +321,7 @@ i = 0
 x=' '
 round2teams=[]
 while i < 64:
-    table = Simulate(teams[i], teams[i+1], 3)
+    table = Simulate(teams[i], teams[i+1], 10000)
     rows = len(table)
     table = str(table)
     table = table.replace("dtype: int64", "")
@@ -341,7 +344,7 @@ temp = []
 while k < 32:
     temp.append(round2teams[k].strip())
     temp.append(round2teams[k + 1].strip())
-    table = Simulate(temp[k], temp[k+1], 3)
+    table = Simulate(temp[k], temp[k+1], 10000)
     rows = len(table)
     table = str(table)
     table = table.replace("dtype: int64", "")
@@ -363,7 +366,7 @@ temp2 = []
 while l < 16:
     temp2.append(round3teams[l].strip())
     temp2.append(round3teams[l + 1].strip())
-    table = Simulate(temp2[l], temp2[l+1], 3)
+    table = Simulate(temp2[l], temp2[l+1], 10000)
     rows = len(table)
     table = str(table)
     table = table.replace("dtype: int64", "")
@@ -385,7 +388,7 @@ temp3 = []
 while m < 8:
     temp3.append(round4teams[m].strip())
     temp3.append(round4teams[m + 1].strip())
-    table = Simulate(temp3[m], temp3[m+1], 3)
+    table = Simulate(temp3[m], temp3[m+1], 10000)
     rows = len(table)
     table = str(table)
     table = table.replace("dtype: int64", "")
@@ -407,7 +410,7 @@ temp4 = []
 while n < 4:
     temp4.append(round5teams[n].strip())
     temp4.append(round5teams[n + 1].strip())
-    table = Simulate(temp4[n], temp4[n+1], 3)
+    table = Simulate(temp4[n], temp4[n+1], 10000)
     rows = len(table)
     table = str(table)
     table = table.replace("dtype: int64", "")
@@ -422,7 +425,7 @@ while n < 4:
     table = table + z
     round6teams.append(table)
     n = n + 2
-champion = Simulate(round6teams[0].strip(), round6teams[1].strip(), 3)
+champion = Simulate(round6teams[0].strip(), round6teams[1].strip(), 10000)
 rows = len(champion)
 champion = str(champion)
 champion = champion.replace("dtype: int64", "")
@@ -573,6 +576,3 @@ This feature, along with the single game simulation, is only currently for the 2
 # Future Work
 
 There are two main things that I would like to add to this project. Firstly, as mentioned previously the ability of the model to judge strength of schedule is currently not up to par. Adding something to account for the different schedules played in college basketball would go a long way in improving this model. A Second addition would be to add a score to the bracket generator. This would be accomplished by awarding points if the simulator chose the correct team to advance each round. Generating the bracket would then not only produce a new bracket but also how well the bracket did when compared to what actually happened. On top of the fun part of that addition, it would also be very practical. When adjusting the model I would be able to also run tests to see if the average score of the model went up or down as a result of the change, intertwining both ends of the future work of this project.
-
-
-The resources used to complete this project include @tidyX, @kenpom, @wikipedia, @teamrankings, and @CBS.
